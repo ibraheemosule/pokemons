@@ -1,7 +1,12 @@
 import { FC } from 'react';
+import TopHeader from './top-header/Topheader';
 
 const Home: FC = () => {
-  return <div>homepage</div>;
+  return (
+    <div>
+      <TopHeader />
+    </div>
+  );
 };
 
 export default Home;

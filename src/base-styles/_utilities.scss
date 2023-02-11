@@ -1,7 +1,8 @@
 @use 'sass:math';
 
-@mixin min-width($breakpoint) {
-  @media (max-width: $breakpoint) {
+@mixin min($breakpoint) {
+  @media (min-width: ($breakpoint + px)) {
+    @content;
   }
 }
 
