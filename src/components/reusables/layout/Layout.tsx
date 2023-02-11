@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Navbar from './navbar/Navbar';
 import Home from '../../pages/home/Home';
-import s from './s_layout.module.scss';
+//import s from './s_layout.module.scss';
 
 const Layout: FC = () => {
   return (
