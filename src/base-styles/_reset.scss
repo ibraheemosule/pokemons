@@ -17,8 +17,11 @@ body {
   min-height: 100vh;
   background-color: $sec-col;
   line-height: 1.5rem;
+  color: $pry-col;
 }
 
-a {
+a,
+button {
   text-decoration: none;
+  cursor: pointer;
 }

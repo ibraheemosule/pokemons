@@ -5,6 +5,7 @@
 
   h1 {
     font-size: rem(32);
+    color: $pry-col-dark;
   }
 
   h4 {
@@ -21,7 +22,6 @@
 
     .input_wrapper {
       border-radius: rem(5);
-      background-color: green;
       flex-grow: 1;
       flex-basis: 100%;
       position: relative;

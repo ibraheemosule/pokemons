@@ -1,7 +1,6 @@
 @import '../../../../../base-styles//globals';
 
 .card {
-  cursor: pointer;
   position: relative;
   border-radius: 10px;
   height: 300px;
@@ -37,7 +36,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: $pry-col-light;
 
     p {
       position: relative;
