@@ -34,6 +34,16 @@ const PokeDetailsPage: FC = () => {
             <div className={s.nav_content}>
               <Form />
             </div>
+            <div className={s.description}>
+              <h3>Mega Charizard X</h3>
+              <p>
+                Aijdfkl a jfl dksafjkladkflksafdklklsjdfkl ajsfkljlks
+                akldfkljklsdgjlkajdklfjslkdjf lkajslkdgi asjfa kljalkj fladjld
+                kglsjlkdsajlk cljlkgjladgl flksdj lkgjdlkadklfgjlk bjafdlk
+                lkgjlkdagfkl gljliadfgjlkafdjglj iajdfglkjlgfkadgjc
+                lzjlkcfdglkjlkafj
+              </p>
+            </div>
           </div>
         </div>
       </section>
