@@ -1,13 +1,14 @@
 import { FC } from 'react';
 import Navbar from './navbar/Navbar';
-import Home from '../../pages/home/Home';
-//import s from './s_layout.module.scss';
+//import Homepage from '../../pages/homepage/Home';
+import PokeDetailsPage from '../../pages/pokedex-details/PokedexDetailsPage';
+import s from './s_layout.module.scss';
 
 const Layout: FC = () => {
   return (
-    <main>
+    <main className={s.layout}>
       <Navbar />
-      <Home />
+      <PokeDetailsPage />
     </main>
   );
 };

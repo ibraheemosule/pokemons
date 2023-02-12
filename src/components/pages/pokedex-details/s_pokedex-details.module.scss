@@ -1,0 +1,11 @@
+@import '../../../base-styles/globals';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: rem(40) rem(20);
+  margin: rem(24) 0 0;
+  padding: rem(16);
+  border: 2px solid $pry-col;
+  border-radius: rem(10);
+}

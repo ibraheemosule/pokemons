@@ -9,7 +9,7 @@ const PokedexCard2: FC = () => {
       <div className={s.card_backdrop}></div>
       <div className={s.card_view}>
         <p>
-          view <span></span>
+          View<span></span>
         </p>
       </div>
       <div className={s.card_content__wrapper}>
