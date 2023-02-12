@@ -37,7 +37,7 @@
 
       input {
         width: 100%;
-        background: $pry-col-light
+        background: $pry-col-light;
         padding: 1rem 1rem 1rem 3rem;
       }
     }
@@ -50,7 +50,7 @@
 }
 
 @include min(900) {
-  .topheader {
+  .top_header {
     &__search {
       .input_wrapper {
         flex-basis: auto;

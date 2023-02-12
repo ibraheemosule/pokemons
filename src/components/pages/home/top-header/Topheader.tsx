@@ -10,7 +10,7 @@ const TopHeader: FC = () => {
         <h4>
           Search for a Pokemon by name or using its National Pokedex number.
         </h4>
-        <div className={s.topheader__search}>
+        <div className={s.top_header__search}>
           <div className={s.input_wrapper}>
             <span className={s.search_icon}>
               <SearchIcon />

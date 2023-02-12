@@ -1,0 +1,117 @@
+@import '../../../../../base-styles//globals';
+
+.card {
+  cursor: pointer;
+  position: relative;
+  border-radius: 10px;
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+
+  &_backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.4;
+    @include transition(opacity);
+  }
+
+  &_view {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    p {
+      position: relative;
+      font-size: rem(24);
+      padding: 0.5rem 2rem;
+
+      span {
+        height: 3px;
+        width: 18px;
+        background-color: $pry-col;
+        position: absolute;
+        bottom: rem(-3);
+        left: calc(50% - 9px);
+        @include transition(opacity);
+      }
+    }
+  }
+
+  &_content__wrapper {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2em 0.75rem;
+    background-color: rgba(58, 48, 112, 0.5);
+    color: $pry-col-light;
+    @include transition(background-color);
+
+    span {
+      padding: rem(2) rem(20);
+      background: green;
+      border-radius: rem(5);
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    .card_backdrop {
+      opacity: 0.15;
+    }
+
+    .card_view {
+      p {
+        border: 4px solid $pry-col;
+        border-radius: 5px;
+      }
+
+      span {
+        opacity: 0;
+      }
+    }
+
+    .card_content__wrapper {
+      background-color: $pry-col-dark;
+    }
+  }
+}
+
+@include min(600) {
+  .card {
+    height: 350px;
+  }
+}
+
+@include min(900) {
+  .card {
+    height: 375px;
+  }
+}
+
+@include min(1200) {
+  .card {
+    height: 300px;
+  }
+}
