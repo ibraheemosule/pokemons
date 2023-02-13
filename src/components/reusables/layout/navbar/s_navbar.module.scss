@@ -5,7 +5,11 @@
   color: $pry-col-light;
   display: flex;
   justify-content: space-between;
-  padding: rem(24) rem(20);
+  padding: rem(20);
+
+  img {
+    width: 30px;
+  }
 
   a {
     color: inherit;
