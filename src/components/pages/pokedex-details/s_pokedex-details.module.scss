@@ -64,6 +64,11 @@
       column-gap: rem(48);
       justify-content: space-between;
       overflow-x: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       border-bottom: 1px solid $pry-col;
 
       li {
@@ -116,7 +121,7 @@
 
   .pokedex_heading {
     .img_wrapper {
-      aspect-ratio: unset;
+      aspect-ratio: 1/1;
       min-height: 500px;
 
       img {

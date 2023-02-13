@@ -1,9 +1,11 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import s from './s_pokedex-details.module.scss';
 import pokemonImage from '../../../assets/images/pokemon.jpg';
-import Form from './form/Form';
+import Form from './pokedex/Form';
 
 const PokeDetailsPage: FC = () => {
+  const [image, setImage] = useState(pokemonImage);
+
   return (
     <main>
       <section className={s.container}>
@@ -18,7 +20,7 @@ const PokeDetailsPage: FC = () => {
               </div>
             </div>
             <div className={s.img_wrapper}>
-              <img src={pokemonImage} alt="pokemon" />
+              <img src={image} alt="pokemon" />
             </div>
           </div>
           <div className={s.pokedex_info}>
@@ -32,7 +34,7 @@ const PokeDetailsPage: FC = () => {
               </ul>
             </nav>
             <div className={s.nav_content}>
-              <Form />
+              <Form setImage={setImage} />
             </div>
             <div className={s.description}>
               <h3>Mega Charizard X</h3>

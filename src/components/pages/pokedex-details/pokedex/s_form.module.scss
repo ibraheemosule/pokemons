@@ -42,11 +42,19 @@
 @include min(900) {
   .form {
     gap: rem(6);
+
+    button {
+      height: 50px;
+    }
   }
 }
 
 @include min(1024) {
   .form {
     gap: rem(24);
+
+    button {
+      height: 80px;
+    }
   }
 }
