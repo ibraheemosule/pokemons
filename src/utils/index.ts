@@ -13,11 +13,11 @@ export const fetchData = async (url: string) => {
 export const getAllPokemons = async () => {
   let data: pokemonListType[] = [],
     next: boolean | null = true,
-    offset = 500;
+    offset = 0;
 
   do {
     try {
-      const res = await fetchData(`/?limit=200&offset=${offset}`);
+      const res = await fetchData(`/?limit=500&offset=${offset}`);
       data = [...data, ...res.results];
       offset += 500;
       next = res.next;
@@ -25,6 +25,5 @@ export const getAllPokemons = async () => {
       next = false;
     }
   } while (next);
-
   return data;
 };

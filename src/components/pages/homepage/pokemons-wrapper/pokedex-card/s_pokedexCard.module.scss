@@ -59,6 +59,7 @@
   &_content__wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -69,7 +70,11 @@
     @include transition(background-color);
 
     span {
-      padding: rem(2) rem(20);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      padding: rem(2) rem(10);
+      margin-left: rem(16);
+      text-align: center;
       background: green;
       border-radius: rem(5);
     }
