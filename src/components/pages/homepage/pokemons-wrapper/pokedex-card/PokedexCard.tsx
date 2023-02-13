@@ -1,12 +1,16 @@
 import { FC } from 'react';
 import s from './s_pokedexCard.module.scss';
-import pokemonImage from '../../../../../assets/images/pokemon.jpg';
 import { Link } from 'react-router-dom';
 
 const PokedexCard: FC = () => {
   return (
     <Link to="/pokedex" className={s.card}>
-      <img src={pokemonImage} alt="pokemon" />
+      <img
+        src={
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'
+        }
+        alt="pokemon"
+      />
       <div className={s.card_backdrop} />
       <div className={s.card_view}>
         <p>

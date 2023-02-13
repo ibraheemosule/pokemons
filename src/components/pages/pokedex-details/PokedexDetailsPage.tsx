@@ -20,7 +20,12 @@ const PokeDetailsPage: FC = () => {
               </div>
             </div>
             <div className={s.img_wrapper}>
-              <img src={image} alt="pokemon" />
+              <img
+                src={
+                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/1.png'
+                }
+                alt="pokemon"
+              />
             </div>
           </div>
           <div className={s.pokedex_info}>
