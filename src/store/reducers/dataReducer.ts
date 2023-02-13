@@ -1,15 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getPokemons } from './apiCalls';
-import { pokemonListType } from '../../utils/ts-types';
+import { pokemonListType, IPokemonsState } from '../../utils/ts-types';
 
-interface IState {
-  pokemonsList: pokemonListType[];
-  immutablePokemonsList: pokemonListType[];
-  loading: boolean;
-  error: string;
-}
-
-const initialState: IState = {
+const initialState: IPokemonsState = {
   pokemonsList: [],
   immutablePokemonsList: [],
   loading: false,

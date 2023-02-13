@@ -1,11 +1,20 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  combineReducers,
+  PreloadedState,
+} from '@reduxjs/toolkit';
 import dataReducer from './reducers/dataReducer';
 
-export const store = configureStore({
-  reducer: {
-    data: dataReducer,
-  },
+const rootReducer = combineReducers({
+  pokemons: dataReducer,
 });
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
+export const store = (preloadedState?: PreloadedState<RootState>) =>
+  configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type StoreType = ReturnType<typeof store>;
+export type AppDispatch = StoreType['dispatch'];
