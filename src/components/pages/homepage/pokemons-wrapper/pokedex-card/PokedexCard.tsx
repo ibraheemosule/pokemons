@@ -1,23 +1,24 @@
 import { FC } from 'react';
 import s from './s_pokedexCard.module.scss';
 import pokemonImage from '../../../../../assets/images/pokemon.jpg';
+import { Link } from 'react-router-dom';
 
-const PokedexCard2: FC = () => {
+const PokedexCard: FC = () => {
   return (
-    <button className={s.card}>
+    <Link to="/pokedex" className={s.card}>
       <img src={pokemonImage} alt="pokemon" />
-      <div className={s.card_backdrop}></div>
+      <div className={s.card_backdrop} />
       <div className={s.card_view}>
         <p>
-          View <span></span>
+          View <span />
         </p>
       </div>
       <div className={s.card_content__wrapper}>
         <h3>Crabominable</h3>
         <span>Fire</span>
       </div>
-    </button>
+    </Link>
   );
 };
 
-export default PokedexCard2;
+export default PokedexCard;

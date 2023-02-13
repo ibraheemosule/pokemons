@@ -2,6 +2,16 @@
 
 .navbar {
   background-color: $pry-col;
-  color: #fff;
+  color: $pry-col-light;
+  display: flex;
+  justify-content: space-between;
   padding: rem(24) rem(20);
+
+  a {
+    color: inherit;
+
+    &:hover {
+      color: #fff;
+    }
+  }
 }
