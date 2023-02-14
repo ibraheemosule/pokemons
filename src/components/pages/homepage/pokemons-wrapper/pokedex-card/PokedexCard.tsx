@@ -3,21 +3,30 @@ import s from './s_pokedexCard.module.scss';
 import { Link } from 'react-router-dom';
 import { pokemonListType } from '../../../../../utils/ts-types';
 import { fetchData, pokedexColors } from '../../../../../utils/';
-import { useAppDispatch } from '../../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { addToPokedexDetailsList } from '../../../../../store/reducers/pokedexReducer';
 
 const PokedexCard: FC<PropType> = ({ pokedex }) => {
+  const pokedexList = useAppSelector(
+    (state) => state.pokedex.pokedexDetailsList
+  );
   const [imgUrl, setImgUrl] = useState('');
   const [color, setColor] = useState('#68A090');
   const { name, url } = pokedex;
   const dispatch = useAppDispatch();
-
   const splitUrl = url.split('/');
   const id = splitUrl[splitUrl.length - 2];
+  const controller = new AbortController();
 
   useEffect(() => {
+    const pokedexInStore = pokedexList[name as keyof typeof pokedexList];
+
     (async () => {
-      const pokedexInfo = await fetchData(name);
+      let pokedexInfo;
+
+      if (!pokedexInStore) {
+        pokedexInfo = await fetchData(name, controller.signal);
+      } else pokedexInfo = pokedexInStore;
 
       setImgUrl(
         pokedexInfo.sprites.front_shiny || pokedexInfo.sprites.front_default
@@ -32,7 +41,9 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
 
       dispatch(addToPokedexDetailsList({ [name]: pokedexInfo }));
     })();
-  }, []);
+
+    return () => controller.abort();
+  }, [pokedex]);
 
   //get the first two names if the names are more than 2
   const nameSnippet = useCallback(() => {

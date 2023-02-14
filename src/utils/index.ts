@@ -5,8 +5,10 @@ const Axios = axios.create({
   baseURL: 'https://pokeapi.co/api/v2/pokemon',
 });
 
-export const fetchData = async (url: string) => {
-  const { data } = await Axios.get(url);
+export const fetchData = async (url: string, signal?: AbortSignal) => {
+  const { data } = await Axios.get(url, {
+    signal,
+  });
   return data;
 };
 
