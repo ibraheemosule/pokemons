@@ -1,19 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IPokedexState } from '../../utils/ts-types';
 
-const initialState: IPokedexState = {
-  pokedexDetailsList: [],
+const initialState: IPokedexState<object> = {
+  pokedexDetailsList: {},
 };
 
 const dataSlice = createSlice({
   name: 'pokedex',
   initialState,
   reducers: {
-    addToPokedexDetailsList(state, action: PayloadAction<[]>) {
-      state.pokedexDetailsList = [
+    addToPokedexDetailsList<T>(
+      state: IPokedexState<T>,
+      action: PayloadAction<T>
+    ) {
+      state.pokedexDetailsList = {
         ...state.pokedexDetailsList,
         ...action.payload,
-      ];
+      };
     },
   },
 });

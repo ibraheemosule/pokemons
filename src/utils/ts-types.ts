@@ -10,6 +10,6 @@ export interface IPokemonsState {
   error: string;
 }
 
-export interface IPokedexState {
-  pokedexDetailsList: pokemonListType[];
+export interface IPokedexState<T> {
+  pokedexDetailsList: T;
 }

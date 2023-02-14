@@ -1,12 +1,30 @@
-import { FC, memo, useCallback } from 'react';
+import { FC, memo, useCallback, useEffect, useState } from 'react';
 import s from './s_pokedexCard.module.scss';
 import { Link } from 'react-router-dom';
 import { pokemonListType } from '../../../../../utils/ts-types';
+import { fetchData } from '../../../../../utils/';
+import { useAppDispatch } from '../../../../../store/hooks';
+import { addToPokedexDetailsList } from '../../../../../store/reducers/pokedexReducer';
 
 const PokedexCard: FC<PropType> = ({ pokedex }) => {
+  const [imgUrl, setImgUrl] = useState('');
   const { name, url } = pokedex;
+  const dispatch = useAppDispatch();
+
   const splitUrl = url.split('/');
   const id = splitUrl[splitUrl.length - 2];
+
+  useEffect(() => {
+    (async () => {
+      const pokedexInfo = await fetchData(name);
+
+      setImgUrl(
+        pokedexInfo.sprites.front_shiny || pokedexInfo.sprites.front_default
+      );
+
+      dispatch(addToPokedexDetailsList({ [name]: pokedexInfo }));
+    })();
+  }, []);
 
   //get the first two names if the names are more than 2
   const nameSnippet = useCallback(() => {
@@ -17,12 +35,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
 
   return (
     <Link to="/pokedex" className={s.card}>
-      <img
-        src={
-          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'
-        }
-        alt="pokemon"
-      />
+      <img src={imgUrl} alt="pokemon" />
       <div className={s.card_backdrop} />
       <div className={s.card_view}>
         <p>
