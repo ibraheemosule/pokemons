@@ -2,12 +2,13 @@ import { FC, memo, useCallback, useEffect, useState } from 'react';
 import s from './s_pokedexCard.module.scss';
 import { Link } from 'react-router-dom';
 import { pokemonListType } from '../../../../../utils/ts-types';
-import { fetchData } from '../../../../../utils/';
+import { fetchData, pokedexColors } from '../../../../../utils/';
 import { useAppDispatch } from '../../../../../store/hooks';
 import { addToPokedexDetailsList } from '../../../../../store/reducers/pokedexReducer';
 
 const PokedexCard: FC<PropType> = ({ pokedex }) => {
   const [imgUrl, setImgUrl] = useState('');
+  const [color, setColor] = useState('#68A090');
   const { name, url } = pokedex;
   const dispatch = useAppDispatch();
 
@@ -22,6 +23,13 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
         pokedexInfo.sprites.front_shiny || pokedexInfo.sprites.front_default
       );
 
+      const pokeTypes = pokedexInfo.types.map(
+        (type: { type: { name: string } }) => type.type.name
+      );
+
+      const primaryType = pokeTypes[0];
+      setColor(pokedexColors[primaryType as keyof typeof pokedexColors]);
+
       dispatch(addToPokedexDetailsList({ [name]: pokedexInfo }));
     })();
   }, []);
@@ -35,7 +43,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
 
   return (
     <Link to="/pokedex" className={s.card}>
-      <img src={imgUrl} alt="pokemon" />
+      <img style={{ background: color }} src={imgUrl} alt="pokemon" />
       <div className={s.card_backdrop} />
       <div className={s.card_view}>
         <p>
@@ -44,7 +52,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
       </div>
       <div className={s.card_content__wrapper}>
         <h3>{nameSnippet()}</h3>
-        <span>
+        <span style={{ background: color }}>
           <strong>id </strong>
           {id}
         </span>
