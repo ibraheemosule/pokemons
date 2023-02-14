@@ -1,4 +1,4 @@
 import { fetchData } from '../../utils';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const getPokemons = createAsyncThunk('data/pokemons', fetchData);
+export const getPokemons = createAsyncThunk('pokemons', fetchData);

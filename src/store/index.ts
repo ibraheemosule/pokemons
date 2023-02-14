@@ -3,10 +3,12 @@ import {
   combineReducers,
   PreloadedState,
 } from '@reduxjs/toolkit';
-import dataReducer from './reducers/dataReducer';
+import pokemonsReducer from './reducers/pokemonsReducer';
+import pokedexReducer from './reducers/pokedexReducer';
 
 const rootReducer = combineReducers({
-  pokemons: dataReducer,
+  pokemons: pokemonsReducer,
+  pokedex: pokedexReducer,
 });
 
 export const store = (preloadedState?: PreloadedState<RootState>) =>

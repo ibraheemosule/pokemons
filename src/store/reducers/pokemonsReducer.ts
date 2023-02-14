@@ -10,7 +10,7 @@ const initialState: IPokemonsState = {
 };
 
 const dataSlice = createSlice({
-  name: 'data',
+  name: 'pokemons',
   initialState,
   reducers: {
     initializePokemonsList(state, action: PayloadAction<pokemonListType[]>) {
