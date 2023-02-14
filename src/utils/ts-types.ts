@@ -4,6 +4,7 @@ export type pokemonListType = {
 };
 
 export interface IPokemonsState {
+  paginatedList: pokemonListType[];
   pokemonsList: pokemonListType[];
   immutablePokemonsList: pokemonListType[];
   loading: boolean;

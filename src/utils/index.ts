@@ -50,3 +50,25 @@ export const pokedexColors = {
   unknown: '#68A090',
   shadow: '#756BBC',
 };
+
+type PaginateType = {
+  arr: pokemonListType[];
+  pageSize: number;
+  pageNumber: number;
+};
+
+export const paginateFunction = ({
+  arr,
+  pageSize,
+  pageNumber,
+}: PaginateType) => {
+  const start = pageSize * (pageNumber - 1);
+  const end = pageSize * pageNumber;
+  return {
+    *[Symbol.iterator]() {
+      for (let i = start; i < arr.length && i < end; i++) {
+        yield arr[i];
+      }
+    },
+  };
+};

@@ -3,7 +3,7 @@ import Layout from './components/reusables/layout/Layout';
 import { getPokemons } from './store/reducers/apiCalls';
 import { useAppDispatch } from './store/hooks';
 import { getAllPokemons } from './utils';
-import { initializePokemonsList } from './store/reducers/pokemonsReducer';
+import { fetchPokemonsList } from './store/reducers/pokemonsReducer';
 
 function App() {
   const dispatch = useAppDispatch();
