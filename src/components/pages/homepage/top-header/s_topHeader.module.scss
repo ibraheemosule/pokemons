@@ -41,25 +41,5 @@
         padding: 1rem 1rem 1rem 3rem;
       }
     }
-
-    .filter_wrapper {
-      flex-shrink: 0;
-      margin-top: rem(24);
-    }
-  }
-}
-
-@include min(900) {
-  .top_header {
-    &__search {
-      .input_wrapper {
-        flex-basis: auto;
-        margin-right: rem(16);
-      }
-
-      .filter_wrapper {
-        margin-top: 0;
-      }
-    }
   }
 }

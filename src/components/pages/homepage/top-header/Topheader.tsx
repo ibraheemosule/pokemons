@@ -17,7 +17,6 @@ const TopHeader: FC = () => {
             </span>
             <input type="text" placeholder="Name or number" />
           </div>
-          <div className={s.filter_wrapper}>filter by</div>
         </div>
       </div>
     </section>
