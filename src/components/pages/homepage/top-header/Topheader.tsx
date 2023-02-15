@@ -3,7 +3,10 @@ import { FC, useState, useEffect, useCallback } from 'react';
 import SearchIcon from '../../../../assets/icons/SearchIcon';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setPokemonList } from '../../../../store/reducers/pokemonsReducer';
-import { resetSearchByIdResult } from '../../../../store/reducers/pokedexReducer';
+import {
+  resetSearchByIdResult,
+  setSearchError,
+} from '../../../../store/reducers/pokedexReducer';
 import { useIdSearchLogic } from './useIdSearchLogic';
 
 const TopHeader: FC = () => {
@@ -16,24 +19,25 @@ const TopHeader: FC = () => {
 
   useIdSearchLogic(searchValue);
 
-  const updateSearchValue = useCallback(
-    (inputText: string) => {
-      const value = inputText.trim();
-      setSearchValue(value);
+  const updateSearchValue = (inputText: string) => {
+    const value = inputText.trim();
+    setSearchValue(value);
 
-      if (Number(value)) {
-        return;
-      }
+    if (Number(value)) {
+      return;
+    }
 
-      dispatch(resetSearchByIdResult());
+    dispatch(resetSearchByIdResult());
 
-      const filteredList = immutablePokemonsList.filter((poke) =>
-        poke.name.startsWith(value)
-      );
-      dispatch(setPokemonList(filteredList));
-    },
-    [searchValue, searchError]
-  );
+    const filteredList = immutablePokemonsList.filter((poke) =>
+      poke.name.startsWith(value)
+    );
+    if (!filteredList.length) {
+      dispatch(setSearchError('Pokedex Not Found'));
+    }
+
+    dispatch(setPokemonList(filteredList));
+  };
 
   useEffect(() => {
     const compareListLength =

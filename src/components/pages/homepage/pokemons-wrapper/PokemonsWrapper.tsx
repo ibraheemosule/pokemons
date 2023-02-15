@@ -3,7 +3,7 @@ import s from './s_pokemonsWrapper.module.scss';
 import PokedexCard from './pokedex-card/PokedexCard';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import spinner from '../../../../assets/images/loader.gif';
-import { resetSearchError } from '../../../../store/reducers/pokedexReducer';
+import { setSearchError } from '../../../../store/reducers/pokedexReducer';
 
 const PokemonsWrapper: FC = () => {
   const dispatch = useAppDispatch();
@@ -22,8 +22,8 @@ const PokemonsWrapper: FC = () => {
 
   const pokedexNotFound = (
     <div className={s.error}>
-      <h3>Pokedex Not Found</h3>
-      <button onClick={() => dispatch(resetSearchError())}>
+      <h3>{searchError}</h3>
+      <button onClick={() => dispatch(setSearchError(''))}>
         Show All Pokemons
       </button>
     </div>

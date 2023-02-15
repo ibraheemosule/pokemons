@@ -27,8 +27,8 @@ const pokedexSlice = createSlice({
       state.searchByIdResult = [];
     },
 
-    resetSearchError<T>(state: IPokedexState<T>) {
-      state.searchError = '';
+    setSearchError<T>(state: IPokedexState<T>, action: PayloadAction<string>) {
+      state.searchError = action.payload;
     },
   },
 
@@ -65,7 +65,7 @@ const pokedexSlice = createSlice({
 export const {
   addToPokedexDetailsList,
   resetSearchByIdResult,
-  resetSearchError,
+  setSearchError,
 } = pokedexSlice.actions;
 
 export default pokedexSlice.reducer;
