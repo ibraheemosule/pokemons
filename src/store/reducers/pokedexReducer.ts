@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IPokedexState } from '../../utils/ts-types';
+import { getPokedex } from './apiCalls';
+import { BASE_URL } from '../../utils';
 
 const initialState: IPokedexState<object> = {
   pokedexDetailsList: {},
+  searching: false,
+  searchError: '',
+  searchByIdResult: [],
 };
 
-const dataSlice = createSlice({
+const pokedexSlice = createSlice({
   name: 'pokedex',
   initialState,
   reducers: {
@@ -18,9 +23,42 @@ const dataSlice = createSlice({
         ...action.payload,
       };
     },
+    resetSearchByIdResult<T>(state: IPokedexState<T>) {
+      state.searchByIdResult = [];
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(getPokedex.pending, (state) => {
+      state.searching = true;
+      state.searchError = '';
+    }),
+      builder.addCase(
+        getPokedex.fulfilled,
+        (state: IPokedexState<object>, { payload }: { [key: string]: any }) => {
+          state.pokedexDetailsList = {
+            ...state.pokedexDetailsList,
+            [payload.name]: payload,
+          };
+
+          state.searching = false;
+          state.searchError = '';
+
+          const data = [
+            { name: payload.name, url: `${BASE_URL}/${payload.id}/` },
+          ];
+
+          state.searchByIdResult = data;
+        }
+      ),
+      builder.addCase(getPokedex.rejected, (state) => {
+        state.searching = false;
+        state.searchError = 'Cannot Find Pokedex';
+      });
   },
 });
 
-export const { addToPokedexDetailsList } = dataSlice.actions;
+export const { addToPokedexDetailsList, resetSearchByIdResult } =
+  pokedexSlice.actions;
 
-export default dataSlice.reducer;
+export default pokedexSlice.reducer;

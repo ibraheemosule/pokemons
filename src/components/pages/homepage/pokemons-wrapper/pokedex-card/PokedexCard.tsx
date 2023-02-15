@@ -1,7 +1,7 @@
 import { FC, memo, useCallback, useEffect, useState } from 'react';
 import s from './s_pokedexCard.module.scss';
 import { Link } from 'react-router-dom';
-import { pokemonListType } from '../../../../../utils/ts-types';
+import { PokemonListType } from '../../../../../utils/ts-types';
 import { fetchData, pokedexColors } from '../../../../../utils/';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { addToPokedexDetailsList } from '../../../../../store/reducers/pokedexReducer';
@@ -25,7 +25,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
       let pokedexInfo;
 
       if (!pokedexInStore) {
-        pokedexInfo = await fetchData(name, controller.signal);
+        pokedexInfo = await fetchData(controller.signal)(name);
       } else pokedexInfo = pokedexInStore;
 
       setImgUrl(
@@ -73,7 +73,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
 };
 
 interface PropType {
-  pokedex: pokemonListType;
+  pokedex: PokemonListType;
 }
 
 export default memo(PokedexCard);

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getPokemons } from './apiCalls';
-import { pokemonListType, IPokemonsState } from '../../utils/ts-types';
+import { PokemonListType, IPokemonsState } from '../../utils/ts-types';
 
 const initialState: IPokemonsState = {
   pokemonsList: [],
@@ -10,15 +10,15 @@ const initialState: IPokemonsState = {
   error: '',
 };
 
-const dataSlice = createSlice({
+const pokemonsSlice = createSlice({
   name: 'pokemons',
   initialState,
   reducers: {
-    fetchPokemonsList(state, action: PayloadAction<pokemonListType[]>) {
+    fetchPokemonsList(state, action: PayloadAction<PokemonListType[]>) {
       state.immutablePokemonsList = state.pokemonsList = action.payload;
     },
 
-    setPokemonList(state, action: PayloadAction<pokemonListType[]>) {
+    setPokemonList(state, action: PayloadAction<PokemonListType[]>) {
       state.pokemonsList = action.payload;
     },
 
@@ -26,7 +26,7 @@ const dataSlice = createSlice({
       state.pokemonsList = state.immutablePokemonsList;
     },
 
-    setPaginatedList(state, action: PayloadAction<pokemonListType[]>) {
+    setPaginatedList(state, action: PayloadAction<PokemonListType[]>) {
       state.paginatedList = action.payload;
     },
   },
@@ -54,6 +54,6 @@ export const {
   setPokemonList,
   resetPokemonList,
   setPaginatedList,
-} = dataSlice.actions;
+} = pokemonsSlice.actions;
 
-export default dataSlice.reducer;
+export default pokemonsSlice.reducer;

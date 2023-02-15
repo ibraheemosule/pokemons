@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { pokemonListType } from './ts-types';
+import { PokemonListType } from './ts-types';
 
-const Axios = axios.create({
-  baseURL: 'https://pokeapi.co/api/v2/pokemon',
+export const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
+export const Axios = axios.create({
+  baseURL: BASE_URL,
 });
 
-export const fetchData = async (url: string, signal?: AbortSignal) => {
+export const fetchData = (signal?: AbortSignal) => async (url: string) => {
   const { data } = await Axios.get(url, {
     signal,
   });
@@ -13,13 +14,13 @@ export const fetchData = async (url: string, signal?: AbortSignal) => {
 };
 
 export const getAllPokemons = async () => {
-  let data: pokemonListType[] = [],
+  let data: PokemonListType[] = [],
     next: boolean | null = true,
     offset = 0;
 
   do {
     try {
-      const res = await fetchData(`/?limit=500&offset=${offset}`);
+      const res = await fetchData()(`/?limit=500&offset=${offset}`);
       data = [...data, ...res.results];
       offset += 500;
       next = res.next;
@@ -54,7 +55,7 @@ export const pokedexColors = {
 };
 
 type PaginateType = {
-  arr: pokemonListType[];
+  arr: PokemonListType[];
   pageSize: number;
   pageNumber: number;
 };
