@@ -26,6 +26,10 @@ const pokedexSlice = createSlice({
     resetSearchByIdResult<T>(state: IPokedexState<T>) {
       state.searchByIdResult = [];
     },
+
+    resetSearchError<T>(state: IPokedexState<T>) {
+      state.searchError = '';
+    },
   },
 
   extraReducers: (builder) => {
@@ -58,7 +62,10 @@ const pokedexSlice = createSlice({
   },
 });
 
-export const { addToPokedexDetailsList, resetSearchByIdResult } =
-  pokedexSlice.actions;
+export const {
+  addToPokedexDetailsList,
+  resetSearchByIdResult,
+  resetSearchError,
+} = pokedexSlice.actions;
 
 export default pokedexSlice.reducer;

@@ -6,10 +6,17 @@ import { getPokedex } from '../../../../store/reducers/apiCalls';
 export const useIdSearchLogic = (searchValue: string) => {
   const dispatch = useAppDispatch();
   const { immutablePokemonsList } = useAppSelector((state) => state.pokemons);
-  const { searchByIdResult, pokedexDetailsList } = useAppSelector(
+  const { searchByIdResult, pokedexDetailsList, searchError } = useAppSelector(
     (state) => state.pokedex
   );
   const abortFetch = useRef<unknown>();
+
+  //if searchError, reset pokemonList Array
+  useEffect(() => {
+    if (searchError) {
+      dispatch(setPokemonList([]));
+    }
+  }, [searchError]);
 
   //get list of previously fetched pokedex details and group them by id and name
   const idOfPokedexInStore = useMemo(() => {

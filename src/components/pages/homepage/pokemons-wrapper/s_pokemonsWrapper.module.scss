@@ -1,38 +1,67 @@
 @import '../../../../base-styles//globals';
 
 .wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: rem(40) rem(20);
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(40) 2.5%;
+  justify-content: center;
+  align-items: center;
   margin: rem(24) 0 0;
   padding: rem(16);
+  min-height: 350px;
   border: 2px solid $pry-col;
   border-radius: rem(10);
+
+  .error {
+    button {
+      margin: 1rem auto;
+      padding: 1rem 1.75rem;
+      background: $pry-col;
+      border-radius: rem(5);
+      color: $pry-col-light;
+      font-weight: bold;
+      @include transition(background);
+
+      &:hover {
+        background: $pry-col-dark;
+      }
+    }
+  }
 }
 
 @include min(576) {
   .wrapper {
-    grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+    a {
+      flex-basis: 45%;
+    }
   }
 }
 
 @include min(768) {
   .wrapper {
-    gap: rem(40) rem(40);
+    gap: rem(40) 5%;
   }
 }
 
 @include min(900) {
   .wrapper {
-    grid-template-columns: repeat(3, 1fr);
-    gap: rem(40) rem(20);
+    gap: rem(40) 2.5%;
+
+    a {
+      flex-basis: 30%;
+    }
   }
 }
 
 @include min(1200) {
   .wrapper {
-    grid-template-columns: repeat(4, 1fr);
-    gap: rem(40) rem(40);
+    gap: rem(40) 5%;
     padding: rem(40);
+    min-height: 350px;
+
+    a {
+      flex-basis: 20%;
+    }
   }
 }

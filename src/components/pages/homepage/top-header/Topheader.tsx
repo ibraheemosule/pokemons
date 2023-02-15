@@ -1,5 +1,5 @@
 import s from './s_topHeader.module.scss';
-import { FC, ChangeEvent, useState } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
 import SearchIcon from '../../../../assets/icons/SearchIcon';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setPokemonList } from '../../../../store/reducers/pokemonsReducer';
@@ -8,27 +8,45 @@ import { useIdSearchLogic } from './useIdSearchLogic';
 
 const TopHeader: FC = () => {
   const dispatch = useAppDispatch();
-  const { immutablePokemonsList } = useAppSelector((state) => state.pokemons);
-
+  const { immutablePokemonsList, pokemonsList } = useAppSelector(
+    ({ pokemons }) => pokemons
+  );
+  const { searchError } = useAppSelector(({ pokedex }) => pokedex);
   const [searchValue, setSearchValue] = useState('');
 
   useIdSearchLogic(searchValue);
 
-  const updateSearchValue = async (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.trim();
-    setSearchValue(value);
+  const updateSearchValue = useCallback(
+    (inputText: string) => {
+      const value = inputText.trim();
+      setSearchValue(value);
 
-    if (Number(value)) {
-      return;
+      if (Number(value)) {
+        return;
+      }
+
+      dispatch(resetSearchByIdResult());
+
+      const filteredList = immutablePokemonsList.filter((poke) =>
+        poke.name.startsWith(value)
+      );
+      dispatch(setPokemonList(filteredList));
+    },
+    [searchValue, searchError]
+  );
+
+  useEffect(() => {
+    const compareListLength =
+      immutablePokemonsList.length === pokemonsList.length;
+
+    if (compareListLength) {
+      document.querySelector('input')!.value = '';
     }
 
-    dispatch(resetSearchByIdResult());
-
-    const filteredList = immutablePokemonsList.filter((poke) =>
-      poke.name.startsWith(value)
-    );
-    dispatch(setPokemonList(filteredList));
-  };
+    if (searchError) {
+      updateSearchValue('');
+    }
+  }, [searchError]);
 
   return (
     <section className={s.container}>
@@ -45,7 +63,7 @@ const TopHeader: FC = () => {
             <input
               type="text"
               maxLength={25}
-              onChange={(e) => updateSearchValue(e)}
+              onChange={(e) => updateSearchValue(e.target.value)}
               placeholder="Name or number"
             />
           </div>
