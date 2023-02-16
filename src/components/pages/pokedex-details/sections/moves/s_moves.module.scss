@@ -1,0 +1,15 @@
+@import '../../../../../base-styles/globals';
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(16);
+  list-style-type: none;
+  text-transform: capitalize;
+
+  li {
+    border-radius: rem(5);
+    color: $pry-col-dark;
+    padding: rem(2) rem(20);
+  }
+}

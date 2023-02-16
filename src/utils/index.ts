@@ -75,3 +75,11 @@ export const paginateFunction = ({
     },
   };
 };
+
+export const getRandomColor = () => {
+  const colors = Object.keys(pokedexColors);
+  const index = Math.floor(Math.random() * colors.length);
+  const selectedColor = colors[index] as keyof typeof pokedexColors;
+
+  return pokedexColors[selectedColor];
+};

@@ -10,7 +10,7 @@ const DetailsNav: FC = () => {
           <Link to="/pokedex">images</Link>
         </li>
         <li>
-          <Link to="/pokedex">meny</Link>
+          <Link to="/pokedex">Moves</Link>
         </li>
         <li>
           <Link to="/pokedex">meny</Link>
