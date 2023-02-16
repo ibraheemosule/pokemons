@@ -4,11 +4,17 @@ import PokedexCard from './pokedex-card/PokedexCard';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import spinner from '../../../../assets/images/loader.gif';
 import { setSearchError } from '../../../../store/reducers/pokedexReducer';
+import { resetPokemonList } from '../../../../store/reducers/pokemonsReducer';
 
 const PokemonsWrapper: FC = () => {
   const dispatch = useAppDispatch();
   const { paginatedList } = useAppSelector(({ pokemons }) => pokemons);
   const { searchError, searching } = useAppSelector((state) => state.pokedex);
+
+  const resetList = () => {
+    dispatch(setSearchError(''));
+    dispatch(resetPokemonList());
+  };
 
   const showLoadingSpinner = (
     <div className={s.spinner}>
@@ -23,9 +29,7 @@ const PokemonsWrapper: FC = () => {
   const pokedexNotFound = (
     <div className={s.error}>
       <h3>{searchError}</h3>
-      <button onClick={() => dispatch(setSearchError(''))}>
-        Show All Pokemons
-      </button>
+      <button onClick={resetList}>Show All Pokemons</button>
     </div>
   );
 
@@ -34,7 +38,7 @@ const PokemonsWrapper: FC = () => {
       <div className={s.wrapper}>
         {searching
           ? showLoadingSpinner
-          : searchError || !paginatedList.length
+          : searchError && !paginatedList.length
           ? pokedexNotFound
           : renderPokemonList}
       </div>

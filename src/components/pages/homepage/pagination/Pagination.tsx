@@ -6,6 +6,7 @@ import {
   ChangeEvent,
   useState,
   useEffect,
+  useMemo,
 } from 'react';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import { paginateFunction } from '../../../../utils';
@@ -23,6 +24,8 @@ const Pagination: FC = () => {
   const [number, setNumber] = useState(1);
   const [pageNumberInput, setPageNumberInput] = useState<number>(number);
   const numOfPages = Math.ceil(list.length / 8);
+
+  useMemo(() => setNumber(1), [JSON.stringify(list)]);
 
   useEffect(() => setPageNumberInput(number), [number]);
 

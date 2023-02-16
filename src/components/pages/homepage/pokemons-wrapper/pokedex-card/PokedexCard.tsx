@@ -25,7 +25,12 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
       let pokedexInfo;
 
       if (!pokedexInStore) {
-        pokedexInfo = await fetchData(controller.signal)(name);
+        try {
+          pokedexInfo = await fetchData(controller.signal)(name);
+        } catch (e) {
+          console.log('Error while etching details');
+          return;
+        }
       } else pokedexInfo = pokedexInStore;
 
       setImgUrl(

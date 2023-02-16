@@ -32,6 +32,8 @@ const TopHeader: FC = () => {
     const filteredList = immutablePokemonsList.filter((poke) =>
       poke.name.startsWith(value)
     );
+
+    console.log(filteredList);
     if (!filteredList.length) {
       dispatch(setSearchError('Pokedex Not Found'));
     }
@@ -40,15 +42,11 @@ const TopHeader: FC = () => {
   };
 
   useEffect(() => {
-    const compareListLength =
-      immutablePokemonsList.length === pokemonsList.length;
+    setSearchValue('');
 
-    if (compareListLength) {
+    if (!searchError) {
+      setSearchValue('');
       document.querySelector('input')!.value = '';
-    }
-
-    if (searchError) {
-      updateSearchValue('');
     }
   }, [searchError]);
 
