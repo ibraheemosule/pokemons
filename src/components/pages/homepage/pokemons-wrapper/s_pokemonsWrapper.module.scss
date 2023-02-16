@@ -1,4 +1,4 @@
-@import '../../../../base-styles//globals';
+@import '../../../../base-styles/globals';
 
 .wrapper {
   display: flex;
@@ -32,7 +32,8 @@
 @include min(576) {
   .wrapper {
     min-height: 400px;
-    a {
+    & > a,
+    & > div {
       flex-basis: 45%;
     }
   }
@@ -48,7 +49,8 @@
   .wrapper {
     gap: rem(40) 2.5%;
 
-    a {
+    & > a,
+    & > div {
       flex-basis: 30%;
     }
   }
@@ -60,7 +62,8 @@
     padding: rem(40);
     min-height: 350px;
 
-    a {
+    & > a,
+    & > div {
       flex-basis: 20%;
     }
   }

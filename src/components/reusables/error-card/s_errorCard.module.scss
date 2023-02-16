@@ -1,0 +1,31 @@
+@import '../../../base-styles/globals';
+
+.error {
+  text-align: center;
+
+  h3 {
+    text-transform: capitalize;
+  }
+
+  &_btn {
+    margin: 1rem auto;
+    background: $pry-col;
+    border-radius: rem(5);
+    color: $pry-col-light;
+    cursor: pointer;
+    font-weight: bold;
+    @include transition(background);
+
+    &:hover {
+      background: $pry-col-dark;
+    }
+  }
+
+  .lg {
+    padding: 1rem 1.75rem;
+  }
+
+  .sm {
+    padding: 0.5rem 1rem;
+  }
+}

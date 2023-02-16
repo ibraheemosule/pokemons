@@ -5,6 +5,8 @@ import { PokemonListType } from '../../../../../utils/ts-types';
 import { fetchData, pokedexColors } from '../../../../../utils/';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { addToPokedexDetailsList } from '../../../../../store/reducers/pokedexReducer';
+import spinner from '../../../../../assets/images/loader.gif';
+import ErrorCard from '../../../../reusables/error-card/ErrorCard';
 
 const PokedexCard: FC<PropType> = ({ pokedex }) => {
   const pokedexList = useAppSelector(
@@ -12,6 +14,8 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
   );
   const [imgUrl, setImgUrl] = useState('');
   const [color, setColor] = useState('#68A090');
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { name, url } = pokedex;
   const dispatch = useAppDispatch();
   const splitUrl = url.split('/');
@@ -19,36 +23,42 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
   const controller = new AbortController();
 
   useEffect(() => {
-    const pokedexInStore = pokedexList[name as keyof typeof pokedexList];
-
-    (async () => {
-      let pokedexInfo;
-
-      if (!pokedexInStore) {
-        try {
-          pokedexInfo = await fetchData(controller.signal)(name);
-        } catch (e) {
-          console.log('Error while etching details');
-          return;
-        }
-      } else pokedexInfo = pokedexInStore;
-
-      setImgUrl(
-        pokedexInfo.sprites.front_shiny || pokedexInfo.sprites.front_default
-      );
-
-      const pokeTypes = pokedexInfo.types.map(
-        (type: { type: { name: string } }) => type.type.name
-      );
-
-      const primaryType = pokeTypes[0];
-      setColor(pokedexColors[primaryType as keyof typeof pokedexColors]);
-
-      dispatch(addToPokedexDetailsList({ [name]: pokedexInfo }));
-    })();
+    fetchPokeDetails();
 
     return () => controller.abort();
   }, [pokedex]);
+
+  const fetchPokeDetails = async () => {
+    let pokedexInfo;
+    const pokedexInStore = pokedexList[name as keyof typeof pokedexList];
+
+    if (!pokedexInStore) {
+      setError(false);
+      setLoading(true);
+      try {
+        pokedexInfo = await fetchData(controller.signal)(name);
+      } catch (e) {
+        console.log('eroro');
+        setError(true);
+        setLoading(false);
+        return;
+      }
+      setLoading(() => false);
+    } else pokedexInfo = pokedexInStore;
+
+    setImgUrl(
+      pokedexInfo.sprites.front_shiny || pokedexInfo.sprites.front_default
+    );
+
+    const pokeTypes = pokedexInfo.types.map(
+      (type: { type: { name: string } }) => type.type.name
+    );
+
+    const primaryType = pokeTypes[0];
+    setColor(pokedexColors[primaryType as keyof typeof pokedexColors]);
+
+    dispatch(addToPokedexDetailsList({ [name]: pokedexInfo }));
+  };
 
   //get the first two names if the names are more than 2
   const nameSnippet = useCallback(() => {
@@ -57,14 +67,28 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
     return splitName.slice(0, splitName.length - 1).join('-');
   }, [name]);
 
-  return (
-    <Link to="/pokedex" className={s.card}>
+  const cardJSX = (
+    <>
       <img style={{ background: color }} src={imgUrl} alt="pokemon" />
       <div className={s.card_backdrop} />
       <div className={s.card_view}>
-        <p>
-          View <span />
-        </p>
+        {loading && !error && (
+          <img className={s.loading} src={spinner} alt="loading spinner" />
+        )}
+        {!loading && !error && (
+          <p>
+            View <span />
+          </p>
+        )}
+        {error && !loading && (
+          <ErrorCard
+            errMessage="Error while fetching details"
+            size="sm"
+            onBtnClick={() => {
+              fetchPokeDetails();
+            }}
+          />
+        )}
       </div>
       <div className={s.card_content__wrapper}>
         <h3>{nameSnippet()}</h3>
@@ -73,7 +97,19 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
           {id}
         </span>
       </div>
-    </Link>
+    </>
+  );
+
+  return (
+    <>
+      {imgUrl ? (
+        <Link to="/pokedex" className={s.card}>
+          {cardJSX}
+        </Link>
+      ) : (
+        <div className={s.card}>{cardJSX}</div>
+      )}
+    </>
   );
 };
 
