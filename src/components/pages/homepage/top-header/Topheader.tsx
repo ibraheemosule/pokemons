@@ -11,35 +11,36 @@ import { useIdSearchLogic } from './useIdSearchLogic';
 
 const TopHeader: FC = () => {
   const dispatch = useAppDispatch();
-  const { immutablePokemonsList, pokemonsList } = useAppSelector(
-    ({ pokemons }) => pokemons
-  );
+  const { immutablePokemonsList } = useAppSelector(({ pokemons }) => pokemons);
   const { searchError } = useAppSelector(({ pokedex }) => pokedex);
   const [searchValue, setSearchValue] = useState('');
 
   useIdSearchLogic(searchValue);
 
-  const updateSearchValue = (inputText: string) => {
-    const value = inputText.trim();
-    setSearchValue(value);
+  const updateSearchValue = useCallback(
+    (inputText: string) => {
+      const value = inputText.trim();
+      setSearchValue(value);
 
-    if (Number(value)) {
-      return;
-    }
+      if (Number(value)) {
+        return;
+      }
 
-    dispatch(resetSearchByIdResult());
+      dispatch(resetSearchByIdResult());
 
-    const filteredList = immutablePokemonsList.filter((poke) =>
-      poke.name.startsWith(value)
-    );
+      const filteredList = immutablePokemonsList.filter((poke) =>
+        poke.name.startsWith(value)
+      );
 
-    console.log(filteredList);
-    if (!filteredList.length) {
-      dispatch(setSearchError('Pokedex Not Found'));
-    }
+      console.log(filteredList);
+      if (!filteredList.length) {
+        dispatch(setSearchError('Pokedex Not Found'));
+      }
 
-    dispatch(setPokemonList(filteredList));
-  };
+      dispatch(setPokemonList(filteredList));
+    },
+    [searchValue, immutablePokemonsList]
+  );
 
   useEffect(() => {
     setSearchValue('');
