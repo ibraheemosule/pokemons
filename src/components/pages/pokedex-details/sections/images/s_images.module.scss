@@ -1,6 +1,6 @@
 @import '../../../../../base-styles/globals';
 
-.wrapper {
+.images_wrapper {
   display: flex;
   column-gap: rem(6);
   overflow-x: scroll;
@@ -32,7 +32,7 @@
 }
 
 @include min(450) {
-  .wrapper {
+  .images_wrapper {
     button {
       height: 80px;
     }
@@ -40,13 +40,13 @@
 }
 
 @include min(600) {
-  .wrapper {
+  .images_wrapper {
     column-gap: rem(24);
   }
 }
 
 @include min(900) {
-  .wrapper {
+  .images_wrapper {
     gap: rem(6);
 
     button {
@@ -56,7 +56,7 @@
 }
 
 @include min(1024) {
-  .wrapper {
+  .images_wrapper {
     column-gap: rem(24);
 
     button {

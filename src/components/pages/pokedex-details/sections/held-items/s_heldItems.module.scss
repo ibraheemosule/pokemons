@@ -1,0 +1,54 @@
+@import '../../../../../base-styles/globals';
+
+.held_items_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(24);
+  list-style-type: none;
+  text-transform: capitalize;
+  justify-content: space-around;
+
+  .no_item {
+    text-align: center;
+    text-transform: capitalize;
+    padding: 1rem;
+  }
+
+  .item {
+    border-radius: rem(5);
+    background: $pry-col-light;
+    color: $pry-col-dark;
+    max-height: 200px;
+    overflow: scroll;
+
+    & > h4 {
+      text-align: center;
+      text-transform: uppercase;
+      padding: 1rem;
+    }
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  thead th {
+    font-weight: bold;
+    padding: rem(10) rem(20);
+    text-align: left;
+  }
+
+  tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: rem(10) rem(20);
+    text-align: left;
+    white-space: nowrap;
+    color: $pry-col;
+  }
+
+  td:first-child {
+    width: 30%;
+  }
+}
