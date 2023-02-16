@@ -8,7 +8,7 @@ const ErrorCard: FC<PropType> = (props) => {
     <div className={s.error}>
       <h3>{errMessage}</h3>
       <button className={`${s.error_btn} ${s[size]}`} onClick={onBtnClick}>
-        {btnText ?? 'Retry'}
+        {btnText ?? 'retry'}
       </button>
     </div>
   );
@@ -18,6 +18,6 @@ interface PropType {
   errMessage: string;
   onBtnClick: () => void;
   size?: 'lg' | 'sm';
-  btnText?: 'string';
+  btnText?: string;
 }
 export default ErrorCard;

@@ -2,10 +2,7 @@
 
 .error {
   text-align: center;
-
-  h3 {
-    text-transform: capitalize;
-  }
+  text-transform: capitalize;
 
   &_btn {
     margin: 1rem auto;
@@ -13,6 +10,7 @@
     border-radius: rem(5);
     color: $pry-col-light;
     cursor: pointer;
+    text-transform: inherit;
     font-weight: bold;
     @include transition(background);
 

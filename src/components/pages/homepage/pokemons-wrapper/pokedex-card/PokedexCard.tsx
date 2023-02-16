@@ -32,18 +32,17 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
     let pokedexInfo;
     const pokedexInStore = pokedexList[name as keyof typeof pokedexList];
 
+    setError(false);
+    setLoading(true);
+
     if (!pokedexInStore) {
-      setError(false);
-      setLoading(true);
       try {
         pokedexInfo = await fetchData(controller.signal)(name);
       } catch (e) {
-        console.log('eroro');
         setError(true);
         setLoading(false);
         return;
       }
-      setLoading(() => false);
     } else pokedexInfo = pokedexInStore;
 
     setImgUrl(
@@ -53,6 +52,9 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
     const pokeTypes = pokedexInfo.types.map(
       (type: { type: { name: string } }) => type.type.name
     );
+
+    setError(() => false);
+    setLoading(() => false);
 
     const primaryType = pokeTypes[0];
     setColor(pokedexColors[primaryType as keyof typeof pokedexColors]);
@@ -72,22 +74,18 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
       <img style={{ background: color }} src={imgUrl} alt="pokemon" />
       <div className={s.card_backdrop} />
       <div className={s.card_view}>
-        {loading && !error && (
+        {loading ? (
           <img className={s.loading} src={spinner} alt="loading spinner" />
-        )}
-        {!loading && !error && (
-          <p>
-            View <span />
-          </p>
-        )}
-        {error && !loading && (
+        ) : error && !imgUrl ? (
           <ErrorCard
             errMessage="Error while fetching details"
             size="sm"
-            onBtnClick={() => {
-              fetchPokeDetails();
-            }}
+            onBtnClick={() => fetchPokeDetails()}
           />
+        ) : (
+          <p>
+            View <span />
+          </p>
         )}
       </div>
       <div className={s.card_content__wrapper}>
@@ -102,7 +100,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
 
   return (
     <>
-      {imgUrl ? (
+      {imgUrl && !loading ? (
         <Link to="/pokedex" className={s.card}>
           {cardJSX}
         </Link>

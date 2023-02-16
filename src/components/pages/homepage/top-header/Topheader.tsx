@@ -1,5 +1,5 @@
 import s from './s_topHeader.module.scss';
-import { FC, useState, useEffect, useCallback } from 'react';
+import { FC, useState, useCallback } from 'react';
 import SearchIcon from '../../../../assets/icons/SearchIcon';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setPokemonList } from '../../../../store/reducers/pokemonsReducer';
@@ -12,7 +12,6 @@ import { useIdSearchLogic } from './useIdSearchLogic';
 const TopHeader: FC = () => {
   const dispatch = useAppDispatch();
   const { immutablePokemonsList } = useAppSelector(({ pokemons }) => pokemons);
-  const { searchError } = useAppSelector(({ pokedex }) => pokedex);
   const [searchValue, setSearchValue] = useState('');
 
   useIdSearchLogic(searchValue);
@@ -32,7 +31,6 @@ const TopHeader: FC = () => {
         poke.name.startsWith(value)
       );
 
-      console.log(filteredList);
       if (!filteredList.length) {
         dispatch(setSearchError('Pokedex Not Found'));
       }
@@ -41,15 +39,6 @@ const TopHeader: FC = () => {
     },
     [searchValue, immutablePokemonsList]
   );
-
-  useEffect(() => {
-    setSearchValue('');
-
-    if (!searchError) {
-      setSearchValue('');
-      document.querySelector('input')!.value = '';
-    }
-  }, [searchError]);
 
   return (
     <section className={s.container}>

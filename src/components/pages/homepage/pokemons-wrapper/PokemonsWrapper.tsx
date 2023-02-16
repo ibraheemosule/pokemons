@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import spinner from '../../../../assets/images/loader.gif';
 import { setSearchError } from '../../../../store/reducers/pokedexReducer';
 import { resetPokemonList } from '../../../../store/reducers/pokemonsReducer';
+import ErrorCard from '../../../reusables/error-card/ErrorCard';
 
 const PokemonsWrapper: FC = () => {
   const dispatch = useAppDispatch();
@@ -27,10 +28,11 @@ const PokemonsWrapper: FC = () => {
   );
 
   const pokedexNotFound = (
-    <div className={s.error}>
-      <h3>{searchError}</h3>
-      <button onClick={resetList}>Show All Pokemons</button>
-    </div>
+    <ErrorCard
+      errMessage={searchError}
+      onBtnClick={resetList}
+      btnText="show all pokemons"
+    />
   );
 
   return (
