@@ -6,6 +6,7 @@
   padding: 0;
   border: 0;
   outline: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -13,7 +14,6 @@ html {
 }
 
 body {
-  box-sizing: border-box;
   font: {
     size: 16px;
     family: 'Open Sans', 'Roboto', sans-serif;

@@ -3,21 +3,22 @@
 .wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  gap: rem(40) rem(40);
+  gap: 0 rem(40);
   margin: rem(24) 0 0;
   padding: rem(32) rem(16);
   border: 2px solid $pry-col;
   border-radius: rem(10);
+
+  h3 {
+    color: $pry-col-dark;
+    text-transform: capitalize;
+  }
 }
 
 .pokedex_heading {
   .name {
     display: flex;
     justify-content: space-between;
-
-    h3 {
-      color: $pry-col-dark;
-    }
 
     div {
       display: flex;
@@ -37,16 +38,18 @@
 
   .img_wrapper {
     display: flex;
+    background: $pry-col-light;
     width: 100%;
     aspect-ratio: 1/1;
     margin-top: rem(24);
+    padding: 3rem;
     border-radius: rem(10);
     overflow: hidden;
 
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
   }
 }
@@ -55,28 +58,6 @@
   align-self: center;
   overflow: hidden;
   padding: 0;
-
-  nav {
-    ul {
-      width: 100%;
-      list-style-type: none;
-      display: flex;
-      column-gap: rem(48);
-      justify-content: space-between;
-      overflow-x: scroll;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      border-bottom: 1px solid $pry-col;
-
-      li {
-        padding: 1rem 0;
-        font-weight: 700;
-      }
-    }
-  }
 
   .nav_content {
     min-height: 100px;
@@ -99,12 +80,13 @@
 
 @include min(600) {
   .wrapper {
-    padding: rem(56);
+    padding: rem(24);
   }
 
   .pokedex_heading {
     .img_wrapper {
       aspect-ratio: 3/2;
+      padding: 2rem;
     }
   }
 

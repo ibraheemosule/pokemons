@@ -1,14 +1,21 @@
-@import '../../../../base-styles/globals';
+@import '../../../../../base-styles/globals';
 
-.form {
+.wrapper {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: rem(6);
+  column-gap: rem(6);
+  overflow-x: scroll;
+  padding: 0 1rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   button {
+    background-color: $pry-col-light;
     height: 50px;
     aspect-ratio: 1/1;
+    flex-shrink: 0;
     overflow: hidden;
     border-radius: rem(5);
     @include transition(transform);
@@ -26,7 +33,7 @@
 }
 
 @include min(450) {
-  .form {
+  .wrapper {
     button {
       height: 80px;
     }
@@ -34,13 +41,13 @@
 }
 
 @include min(600) {
-  .form {
-    gap: rem(24);
+  .wrapper {
+    column-gap: rem(24);
   }
 }
 
 @include min(900) {
-  .form {
+  .wrapper {
     gap: rem(6);
 
     button {
@@ -50,8 +57,8 @@
 }
 
 @include min(1024) {
-  .form {
-    gap: rem(24);
+  .wrapper {
+    column-gap: rem(24);
 
     button {
       height: 80px;

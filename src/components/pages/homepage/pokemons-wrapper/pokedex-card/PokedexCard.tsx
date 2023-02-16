@@ -101,7 +101,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
   return (
     <>
       {imgUrl && !loading ? (
-        <Link to="/pokedex" className={s.card}>
+        <Link to={name} className={s.card}>
           {cardJSX}
         </Link>
       ) : (

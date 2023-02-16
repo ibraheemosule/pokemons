@@ -1,48 +1,44 @@
 import { FC, useState } from 'react';
 import s from './s_pokedex-details.module.scss';
-import pokemonImage from '../../../assets/images/pokemon.jpg';
-import Form from './pokedex/Form';
+import DetailsNav from './sections/details-nav/DetailsNav';
+
+import Images from './sections/images/Images';
+import { useLocation } from 'react-router-dom';
+import { useAppSelector } from '../../../store/hooks';
+import poke from './testingData';
+import { useGetImages } from './hooks/useGetImages';
 
 const PokeDetailsPage: FC = () => {
-  const [image, setImage] = useState(pokemonImage);
+  const { pokedexDetailsList } = useAppSelector(({ pokedex }) => pokedex);
+  const name = useLocation().state as keyof typeof pokedexDetailsList;
+  const [pokedex, setPokedex] = useState<any>(poke);
+
+  const { image, setImage, imageUrls } = useGetImages(poke.sprites);
 
   return (
     <main>
       <section className={s.container}>
         <div className={s.wrapper}>
           <div className={s.pokedex_heading}>
-            <p>n 006</p>
+            <p>n {pokedex.id}</p>
             <div className={s.name}>
-              <h3>Charizard</h3>
+              <h3>{poke.name}</h3>
               <div>
                 <span>Free</span>
                 <span>Fire</span>
               </div>
             </div>
             <div className={s.img_wrapper}>
-              <img
-                src={
-                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/1.png'
-                }
-                alt="pokemon"
-              />
+              <img src={image} alt="pokemon" />
             </div>
           </div>
           <div className={s.pokedex_info}>
-            <nav>
-              <ul>
-                <li>meny</li>
-                <li>meny</li>
-                <li>meny</li>
-                <li>meny</li>
-                <li>meny</li>
-              </ul>
-            </nav>
+            <DetailsNav />
             <div className={s.nav_content}>
-              <Form setImage={setImage} />
+              <Images imageUrls={imageUrls} setImage={setImage} />
             </div>
             <div className={s.description}>
-              <h3>Mega Charizard X</h3>
+              <h3>{poke.name}</h3>
               <p>
                 Aijdfkl a jfl dksafjkladkflksafdklklsjdfkl ajsfkljlks
                 akldfkljklsdgjlkajdklfjslkdjf lkajslkdgi asjfa kljalkj fladjld
