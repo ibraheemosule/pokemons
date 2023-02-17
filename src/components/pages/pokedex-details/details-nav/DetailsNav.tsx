@@ -8,16 +8,16 @@ import {
   useCallback,
 } from 'react';
 import s from './s_detailsNav.module.scss';
-import spinner from '../../../../../assets/images/loader.gif';
-import { IPokedex } from '../../../../../utils/ts-types';
+import spinner from '../../../../assets/images/loader.gif';
+import { IPokedex } from '../../../../utils/ts-types';
 
-const Moves = lazy(() => import('../moves/Moves'));
-const Images = lazy(() => import('../images/Images'));
-const Stats = lazy(() => import('../stats/Stats'));
-const HeldItems = lazy(() => import('../held-items/HeldItems'));
-const Abilities = lazy(() => import('../abilities/Abilities'));
-const Evolutions = lazy(() => import('../evolutions/Evolutions'));
-const Indices = lazy(() => import('../indices/Indices'));
+const Moves = lazy(() => import('./moves/Moves'));
+const Images = lazy(() => import('./images/Images'));
+const Stats = lazy(() => import('./stats/Stats'));
+const HeldItems = lazy(() => import('./held-items/HeldItems'));
+const Abilities = lazy(() => import('./abilities/Abilities'));
+const Evolutions = lazy(() => import('./evolutions/Evolutions'));
+const Indices = lazy(() => import('./indices/Indices'));
 
 const detailsNavList = [
   'images',

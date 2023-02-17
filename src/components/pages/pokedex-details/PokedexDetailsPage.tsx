@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import s from './s_pokedex-details.module.scss';
-import DetailsNav from './sections/details-nav/DetailsNav';
+import DetailsNav from './details-nav/DetailsNav';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../store/hooks';
 import poke from './testingData';
