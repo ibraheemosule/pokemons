@@ -5,8 +5,8 @@ import { PokemonListType } from '../../../../../utils/ts-types';
 import { fetchData, pokedexColors } from '../../../../../utils/';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { addToPokedexDetailsList } from '../../../../../store/reducers/pokedexReducer';
-import spinner from '../../../../../assets/images/loader.gif';
 import ErrorCard from '../../../../reusables/error-card/ErrorCard';
+import Loader from '../../../../reusables/loader/Loader';
 
 const PokedexCard: FC<PropType> = ({ pokedex }) => {
   const pokedexList = useAppSelector(
@@ -77,7 +77,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
       <div className={s.card_backdrop} />
       <div className={s.card_view}>
         {loading ? (
-          <img className={s.loading} src={spinner} alt="loading spinner" />
+          <Loader width="150px" />
         ) : error && !imgUrl ? (
           <ErrorCard
             errMessage="Error while fetching details"

@@ -6,6 +6,7 @@ import spinner from '../../../../assets/images/loader.gif';
 import { setSearchError } from '../../../../store/reducers/pokedexReducer';
 import { resetPokemonList } from '../../../../store/reducers/pokemonsReducer';
 import ErrorCard from '../../../reusables/error-card/ErrorCard';
+import Loader from '../../../reusables/loader/Loader';
 
 const PokemonsWrapper: FC = () => {
   const dispatch = useAppDispatch();
@@ -17,11 +18,11 @@ const PokemonsWrapper: FC = () => {
     dispatch(resetPokemonList());
   };
 
-  const showLoadingSpinner = (
-    <div className={s.spinner}>
-      <img src={spinner} alt="loading spinner" />
-    </div>
-  );
+  // const showLoadingSpinner = (
+  //   <div className={s.spinner}>
+  //     <img src={spinner} alt="loading spinner" />
+  //   </div>
+  // );
 
   const renderPokemonList = Children.toArray(
     paginatedList.map((pokedex) => <PokedexCard pokedex={pokedex} />)
@@ -38,11 +39,13 @@ const PokemonsWrapper: FC = () => {
   return (
     <section className={s.container}>
       <div className={s.wrapper}>
-        {searching
-          ? showLoadingSpinner
-          : searchError && !paginatedList.length
-          ? pokedexNotFound
-          : renderPokemonList}
+        {searching ? (
+          <Loader />
+        ) : searchError && !paginatedList.length ? (
+          pokedexNotFound
+        ) : (
+          renderPokemonList
+        )}
       </div>
     </section>
   );
