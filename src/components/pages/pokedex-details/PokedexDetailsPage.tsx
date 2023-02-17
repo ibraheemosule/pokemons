@@ -3,6 +3,7 @@ import s from './s_pokedex-details.module.scss';
 import DetailsNav from './sections/details-nav/DetailsNav';
 import Forms from './sections/moves/Moves';
 import Images from './sections/images/Images';
+import Stats from './sections/stats/Stats';
 import HeldItems from './sections/held-items/HeldItems';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../store/hooks';
@@ -38,7 +39,8 @@ const PokeDetailsPage: FC = () => {
             <div className={s.nav_content}>
               {/* <Images imageUrls={imageUrls} setImage={setImage} /> */}
               {/* <Forms moves={poke.moves} /> */}
-              <HeldItems items={poke.held_items} />
+              {/* <HeldItems items={poke.held_items} /> */}
+              <Stats stats={poke.stats} />
             </div>
             <div className={s.description}>
               <h3>{poke.name}</h3>

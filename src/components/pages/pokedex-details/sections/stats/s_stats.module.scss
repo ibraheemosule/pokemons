@@ -1,24 +1,18 @@
 @import '../../../../../base-styles/globals';
 
-.held_items_wrapper {
+.stats {
   display: flex;
   flex-wrap: wrap;
-  gap: rem(24);
   list-style-type: none;
   text-transform: capitalize;
   justify-content: space-around;
-
-  .no_item {
-    text-align: center;
-    text-transform: capitalize;
-    padding: 1rem;
-  }
 
   .item {
     border-radius: rem(5);
     background: $pry-col-light;
     color: $pry-col-dark;
     max-height: 200px;
+    width: 100%;
     overflow: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -42,13 +36,13 @@
   thead th {
     font-weight: bold;
     padding: rem(10) rem(20);
-    text-align: left;
+    text-align: center;
   }
 
   tbody td {
     border-bottom: 1px solid #ddd;
     padding: rem(10) rem(20);
-    text-align: left;
+    text-align: center;
     white-space: nowrap;
     color: $pry-col;
   }

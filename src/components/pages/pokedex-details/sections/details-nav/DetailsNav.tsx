@@ -19,7 +19,7 @@ const DetailsNav: FC = () => {
           <Link to="/pokedex">Held Items</Link>
         </li>
         <li>
-          <Link to="/pokedex">meny</Link>
+          <Link to="/pokedex">Stats</Link>
         </li>
         <li>
           <Link to="/pokedex">meny</Link>
