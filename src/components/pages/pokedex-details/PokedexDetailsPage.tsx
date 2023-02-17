@@ -8,6 +8,7 @@ import { useGetImages } from './hooks/useGetImages';
 import spinner from '../../../assets/images/loader.gif';
 import { IPokedex } from '../../../utils/ts-types';
 import MoreInfo from './more-info/MoreInfo';
+import Heading from './Heading/Heading';
 
 const PokeDetailsPage: FC = () => {
   const { pokedexDetailsList } = useAppSelector(({ pokedex }) => pokedex);
@@ -20,19 +21,7 @@ const PokeDetailsPage: FC = () => {
     <main>
       <section className={s.container}>
         <div className={s.wrapper}>
-          <div className={s.pokedex_heading}>
-            <div className={s.name}>
-              <h3>{poke.name}</h3>
-              <div>
-                <span>
-                  <strong>ID:</strong> {pokedex.id}
-                </span>
-              </div>
-            </div>
-            <div className={s.img_wrapper}>
-              <img src={image} alt="pokemon" />
-            </div>
-          </div>
+          <Heading id={poke.id} image={image} name={poke.name} />
           <div className={s.pokedex_info}>
             <DetailsNav
               pokedex={poke}

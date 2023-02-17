@@ -1,0 +1,59 @@
+@import '../../../../base-styles/globals';
+
+.heading {
+  margin-bottom: rem(48);
+  .name {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+
+      span {
+        border-radius: rem(5);
+        color: $pry-col-light;
+        padding: rem(2) rem(20);
+        background: $pry-col;
+      }
+    }
+  }
+
+  .img_wrapper {
+    display: flex;
+    background: $pry-col-light;
+    width: 100%;
+    aspect-ratio: 3/2;
+    margin-top: rem(24);
+    padding: 3rem;
+    border-radius: rem(10);
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+@include min(600) {
+  .heading {
+    .img_wrapper {
+      padding: 2rem;
+    }
+  }
+}
+
+@include min(900) {
+  .heading {
+    margin-bottom: 0;
+    .img_wrapper {
+      aspect-ratio: 1/1;
+      min-height: 500px;
+
+      img {
+        height: auto;
+      }
+    }
+  }
+}
