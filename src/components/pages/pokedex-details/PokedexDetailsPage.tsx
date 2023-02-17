@@ -1,22 +1,17 @@
-import { FC, lazy, useState, Suspense } from 'react';
+import { FC, useState } from 'react';
 import s from './s_pokedex-details.module.scss';
-import DetailsNav, { detailsNavList } from './sections/details-nav/DetailsNav';
+import DetailsNav from './sections/details-nav/DetailsNav';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../store/hooks';
 import poke from './testingData';
 import { useGetImages } from './hooks/useGetImages';
 import spinner from '../../../assets/images/loader.gif';
-
-const Forms = lazy(() => import('./sections/moves/Moves'));
-const Images = lazy(() => import('./sections/images/Images'));
-const Stats = lazy(() => import('./sections/stats/Stats'));
-const HeldItems = lazy(() => import('./sections/held-items/HeldItems'));
-const Abilities = lazy(() => import('./sections/abilities/Abilities'));
+import { IPokedex } from '../../../utils/ts-types';
 
 const PokeDetailsPage: FC = () => {
   const { pokedexDetailsList } = useAppSelector(({ pokedex }) => pokedex);
   const name = useLocation().state as keyof typeof pokedexDetailsList;
-  const [pokedex, setPokedex] = useState<any>(poke);
+  const [pokedex, setPokedex] = useState<IPokedex>(poke);
 
   const { image, setImage, imageUrls } = useGetImages(poke.sprites);
 
@@ -38,16 +33,7 @@ const PokeDetailsPage: FC = () => {
             </div>
           </div>
           <div className={s.pokedex_info}>
-            <DetailsNav />
-            <div className={s.nav_content}>
-              {/* <Images imageUrls={imageUrls} setImage={setImage} /> */}
-              {/* <Forms moves={poke.moves} /> */}
-              {/* <HeldItems items={poke.held_items} /> */}
-              {/* <Stats stats={poke.stats} /> */}
-              <Suspense fallback={<img src={spinner} alt="loader" />}>
-                <Abilities abilities={poke.abilities} />
-              </Suspense>
-            </div>
+            <DetailsNav pokedex={poke} />
             <div className={s.description}>
               <h3>Additional Information</h3>
               <ul className={s.description_body}>

@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPokedexState } from '../../utils/ts-types';
+import {
+  INamedPokedexDetail,
+  IPokedex,
+  IPokedexState,
+} from '../../utils/ts-types';
 import { getPokedex } from './apiCalls';
 import { BASE_URL } from '../../utils';
 
-const initialState: IPokedexState<object> = {
+const initialState: IPokedexState = {
   pokedexDetailsList: {},
   searching: false,
   searchError: '',
@@ -14,20 +18,20 @@ const pokedexSlice = createSlice({
   name: 'pokedex',
   initialState,
   reducers: {
-    addToPokedexDetailsList<T>(
-      state: IPokedexState<T>,
-      action: PayloadAction<T>
+    addToPokedexDetailsList(
+      state: IPokedexState,
+      action: PayloadAction<INamedPokedexDetail>
     ) {
       state.pokedexDetailsList = {
         ...state.pokedexDetailsList,
         ...action.payload,
       };
     },
-    resetSearchByIdResult<T>(state: IPokedexState<T>) {
+    resetSearchByIdResult(state: IPokedexState) {
       state.searchByIdResult = [];
     },
 
-    setSearchError<T>(state: IPokedexState<T>, action: PayloadAction<string>) {
+    setSearchError(state: IPokedexState, action: PayloadAction<string>) {
       state.searchError = action.payload;
     },
   },
@@ -39,7 +43,7 @@ const pokedexSlice = createSlice({
     }),
       builder.addCase(
         getPokedex.fulfilled,
-        (state: IPokedexState<object>, { payload }: { [key: string]: any }) => {
+        (state: IPokedexState, { payload }: { payload: IPokedex }) => {
           state.pokedexDetailsList = {
             ...state.pokedexDetailsList,
             [payload.name]: payload,

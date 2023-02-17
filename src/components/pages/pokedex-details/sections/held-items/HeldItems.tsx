@@ -1,4 +1,5 @@
 import { FC, memo, Children } from 'react';
+import { IHeldItem } from '../../../../../utils/ts-types';
 import s from './s_heldItems.module.scss';
 
 const HeldItems: FC<PropType> = ({ items }) => {
@@ -43,10 +44,7 @@ const HeldItems: FC<PropType> = ({ items }) => {
 };
 
 interface PropType {
-  items: {
-    item: { name: string };
-    version_details: { rarity: number; version: { name: string } }[];
-  }[];
+  items: IHeldItem[];
 }
 
 export default memo(HeldItems);

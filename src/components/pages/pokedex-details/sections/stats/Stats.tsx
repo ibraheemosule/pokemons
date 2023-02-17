@@ -1,4 +1,5 @@
 import { FC, memo, Children } from 'react';
+import { IStat } from '../../../../../utils/ts-types';
 import s from './s_stats.module.scss';
 
 const Stats: FC<PropType> = ({ stats }) => {
@@ -37,7 +38,7 @@ const Stats: FC<PropType> = ({ stats }) => {
 };
 
 interface PropType {
-  stats: { base_stat: number; effort: number; stat: { name: string } }[];
+  stats: IStat[];
 }
 
 export default memo(Stats);

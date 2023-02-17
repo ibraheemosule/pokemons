@@ -11,36 +11,106 @@ export interface IPokemonsState {
   error: string;
 }
 
-export interface IPokedexState<T> {
-  pokedexDetailsList: T;
+export interface INamedPokedexDetail {
+  [key: string]: IPokedex;
+}
+export interface IPokedexState {
+  pokedexDetailsList: INamedPokedexDetail;
   searchError: string;
   searching: boolean;
   searchByIdResult: PokemonListType[];
 }
 
-export interface PokemonSprites {
-  back_default: string;
-  back_female: string | null;
-  back_shiny: string;
-  back_shiny_female: string | null;
-  front_default: string;
-  front_female: string | null;
-  front_shiny: string;
-  front_shiny_female: string | null;
-  other: {
-    dream_world: {
-      front_default: string | null;
-      front_female: string | null;
-    };
-    home: {
-      front_default: string;
-      front_female: string | null;
-      front_shiny: string;
-      front_shiny_female: string | null;
-    };
-    'official-artwork': {
-      front_default: string;
-      front_shiny: string;
-    };
+export interface IPokedex {
+  id: number;
+  name: string;
+  height: number; // Height of the Pokemon in decimeters
+  weight: number; // Weight of the Pokemon in hectograms
+  abilities: IAbility[];
+  types: IType[];
+  stats: IStat[];
+  sprites: ISprite;
+  species: ISpecies;
+  moves: IMove[];
+  base_experience: number;
+}
+
+export interface IAbility {
+  ability: {
+    name: string;
+    url: string;
   };
+  is_hidden: boolean;
+  slot: number;
+}
+
+export interface IType {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface IStat {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface ISprite {
+  front_default: string;
+  front_shiny: string;
+  front_female?: string;
+  front_shiny_female?: string;
+  back_default: string;
+  back_shiny: string;
+  back_female?: string;
+  back_shiny_female?: string;
+  other: {
+    home: { [key: string]: string };
+    'official-artwork': { [key: string]: string };
+  };
+}
+
+interface ISpecies {
+  name: string;
+  url: string;
+}
+
+interface IMove {
+  move: {
+    name: string;
+    url: string;
+  };
+  version_group_details: IVersionGroupDetail[];
+}
+
+interface IVersionGroupDetail {
+  level_learned_at: number;
+  move_learn_method: {
+    name: string;
+    url: string;
+  };
+  version_group: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface IHeldItem {
+  item: {
+    name: string;
+    url: string;
+  };
+  version_details: {
+    version: {
+      name: string;
+      url: string;
+    };
+    rarity: number;
+  }[];
 }

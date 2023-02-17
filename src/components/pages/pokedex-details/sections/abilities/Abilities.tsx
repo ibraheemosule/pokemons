@@ -1,4 +1,5 @@
 import { FC, memo, Children } from 'react';
+import { IAbility } from '../../../../../utils/ts-types';
 import s from './s_abilities.module.scss';
 
 const Abilities: FC<PropType> = ({ abilities }) => {
@@ -37,7 +38,7 @@ const Abilities: FC<PropType> = ({ abilities }) => {
 };
 
 interface PropType {
-  abilities: { ability: { name: string }; is_hidden: boolean; slot: number }[];
+  abilities: IAbility[];
 }
 
 export default memo(Abilities);

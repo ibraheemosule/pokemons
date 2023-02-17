@@ -20,11 +20,17 @@
       font-weight: 700;
       text-transform: capitalize;
       white-space: nowrap;
+
+      button {
+        all: unset;
+        display: block;
+        cursor: pointer;
+      }
     }
   }
 }
-
 .nav_content {
   min-height: 100px;
-  margin-top: rem(24);
+  margin-top: rem(40);
+  padding: 0 1rem;
 }
