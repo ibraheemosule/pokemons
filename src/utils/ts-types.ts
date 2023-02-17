@@ -29,6 +29,7 @@ export interface IPokedex {
   abilities: IAbility[];
   types: IType[];
   stats: IStat[];
+  held_items: IHeldItem[];
   sprites: ISprite;
   species: ISpecies;
   moves: IMove[];

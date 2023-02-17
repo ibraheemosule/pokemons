@@ -33,7 +33,11 @@ const PokeDetailsPage: FC = () => {
             </div>
           </div>
           <div className={s.pokedex_info}>
-            <DetailsNav pokedex={poke} />
+            <DetailsNav
+              pokedex={poke}
+              imageUrls={imageUrls}
+              setImage={setImage}
+            />
             <div className={s.description}>
               <h3>Additional Information</h3>
               <ul className={s.description_body}>

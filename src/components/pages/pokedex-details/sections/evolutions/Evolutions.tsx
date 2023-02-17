@@ -1,5 +1,5 @@
 import { FC, memo } from 'react';
-import s from './s_moves.module.scss';
+import s from './s_evolutions.module.scss';
 import { getRandomColor } from '../../../../../utils';
 
 const Evolutions: FC = () => {

@@ -20,6 +20,8 @@
       font-weight: 700;
       text-transform: capitalize;
       white-space: nowrap;
+      border-bottom: rem(2) solid transparent;
+      @include transition(border-color);
 
       button {
         all: unset;

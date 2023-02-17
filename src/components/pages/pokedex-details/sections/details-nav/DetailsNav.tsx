@@ -1,4 +1,12 @@
-import { useState, Dispatch, FC, SetStateAction, lazy, Suspense } from 'react';
+import {
+  useState,
+  Dispatch,
+  FC,
+  SetStateAction,
+  lazy,
+  Suspense,
+  useCallback,
+} from 'react';
 import s from './s_detailsNav.module.scss';
 import spinner from '../../../../../assets/images/loader.gif';
 import { IPokedex } from '../../../../../utils/ts-types';
@@ -8,6 +16,7 @@ const Images = lazy(() => import('../images/Images'));
 const Stats = lazy(() => import('../stats/Stats'));
 const HeldItems = lazy(() => import('../held-items/HeldItems'));
 const Abilities = lazy(() => import('../abilities/Abilities'));
+const Evolutions = lazy(() => import('../evolutions/Evolutions'));
 
 export const detailsNavList = [
   'images',
@@ -19,26 +28,39 @@ export const detailsNavList = [
   'indices',
 ];
 
-const DetailsNav: FC<PropType> = ({ pokedex }) => {
+const DetailsNav: FC<PropType> = ({ pokedex, imageUrls, setImage }) => {
   const [content, setContent] = useState('images');
+
+  const active = useCallback(
+    (nav: string) => ({
+      borderColor: nav === content ? 'blue' : '',
+    }),
+    [content]
+  );
+
   return (
     <>
       <nav className={s.nav}>
         <ul>
           {detailsNavList.map((option) => (
-            <li key={option}>
-              <button>{option}</button>
+            <li style={active(option)} key={option}>
+              <button onClick={() => setContent(option)}>{option}</button>
             </li>
           ))}
         </ul>
       </nav>
       <div className={s.nav_content}>
-        {/* <Images imageUrls={imageUrls} setImage={setImage} /> */}
-        {/* <Forms moves={poke.moves} /> */}
-        {/* <HeldItems items={poke.held_items} /> */}
-        {/* <Stats stats={poke.stats} /> */}
         <Suspense fallback={<img src={spinner} alt="loader" />}>
-          <Abilities abilities={pokedex.abilities} />
+          {
+            {
+              images: <Images imageUrls={imageUrls} setImage={setImage} />,
+              moves: <Moves moves={pokedex.moves} />,
+              evolutions: <Evolutions />,
+              'held items': <HeldItems items={pokedex.held_items} />,
+              stats: <Stats stats={pokedex.stats} />,
+              abilities: <Abilities abilities={pokedex.abilities} />,
+            }[content]
+          }
         </Suspense>
       </div>
     </>
@@ -47,6 +69,8 @@ const DetailsNav: FC<PropType> = ({ pokedex }) => {
 
 interface PropType {
   pokedex: IPokedex;
+  imageUrls: string[];
+  setImage: Dispatch<SetStateAction<string>>;
 }
 
 export default DetailsNav;

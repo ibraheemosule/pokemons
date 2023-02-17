@@ -5,6 +5,8 @@
   flex-wrap: wrap;
   gap: rem(16);
   list-style-type: none;
+  overflow-y: scroll;
+  max-height: 200px;
   text-transform: capitalize;
 
   li {
