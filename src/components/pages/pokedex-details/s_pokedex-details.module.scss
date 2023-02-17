@@ -27,11 +27,7 @@
         border-radius: rem(5);
         color: $pry-col-light;
         padding: rem(2) rem(20);
-        background: red;
-      }
-
-      span:first-of-type {
-        margin-right: 1rem;
+        background: $pry-col;
       }
     }
   }
@@ -55,7 +51,6 @@
 }
 
 .pokedex_info {
-  align-self: center;
   overflow: hidden;
   padding: 0;
 

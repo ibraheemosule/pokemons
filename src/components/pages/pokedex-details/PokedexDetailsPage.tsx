@@ -5,10 +5,12 @@ import Forms from './sections/moves/Moves';
 import Images from './sections/images/Images';
 import Stats from './sections/stats/Stats';
 import HeldItems from './sections/held-items/HeldItems';
+import Abilities from './sections/abilities/Abilities';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../store/hooks';
 import poke from './testingData';
 import { useGetImages } from './hooks/useGetImages';
+import { getRandomColor } from '../../../utils';
 
 const PokeDetailsPage: FC = () => {
   const { pokedexDetailsList } = useAppSelector(({ pokedex }) => pokedex);
@@ -22,12 +24,12 @@ const PokeDetailsPage: FC = () => {
       <section className={s.container}>
         <div className={s.wrapper}>
           <div className={s.pokedex_heading}>
-            <p>n {pokedex.id}</p>
             <div className={s.name}>
               <h3>{poke.name}</h3>
               <div>
-                <span>Free</span>
-                <span>Fire</span>
+                <span>
+                  <strong>ID:</strong> {pokedex.id}
+                </span>
               </div>
             </div>
             <div className={s.img_wrapper}>
@@ -40,10 +42,11 @@ const PokeDetailsPage: FC = () => {
               {/* <Images imageUrls={imageUrls} setImage={setImage} /> */}
               {/* <Forms moves={poke.moves} /> */}
               {/* <HeldItems items={poke.held_items} /> */}
-              <Stats stats={poke.stats} />
+              {/* <Stats stats={poke.stats} /> */}
+              <Abilities abilities={poke.abilities} />
             </div>
             <div className={s.description}>
-              <h3>{poke.name}</h3>
+              <h3>More Information</h3>
               <p>
                 Aijdfkl a jfl dksafjkladkflksafdklklsjdfkl ajsfkljlks
                 akldfkljklsdgjlkajdklfjslkdjf lkajslkdgi asjfa kljalkj fladjld

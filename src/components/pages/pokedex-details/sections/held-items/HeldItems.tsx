@@ -14,10 +14,10 @@ const HeldItems: FC<PropType> = ({ items }) => {
                 <thead>
                   <tr>
                     <th>
-                      <h4>Version</h4>
+                      <h4>Item Version</h4>
                     </th>
                     <th>
-                      <h4>Rarity</h4>
+                      <h4>Item Rarity</h4>
                     </th>
                   </tr>
                 </thead>
