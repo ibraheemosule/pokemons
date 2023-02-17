@@ -1,0 +1,21 @@
+@import '../../../../base-styles/globals';
+
+.more_info {
+  margin: rem(40) 0;
+
+  h3 {
+    color: $pry-col-dark;
+  }
+
+  &__body {
+    margin-top: rem(16);
+    font-weight: 500;
+    list-style-type: none;
+
+    li {
+      display: flex;
+      padding: 0.5rem 1rem;
+      justify-content: space-between;
+    }
+  }
+}

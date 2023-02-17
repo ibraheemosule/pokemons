@@ -7,6 +7,7 @@ import poke from './testingData';
 import { useGetImages } from './hooks/useGetImages';
 import spinner from '../../../assets/images/loader.gif';
 import { IPokedex } from '../../../utils/ts-types';
+import MoreInfo from './more-info/MoreInfo';
 
 const PokeDetailsPage: FC = () => {
   const { pokedexDetailsList } = useAppSelector(({ pokedex }) => pokedex);
@@ -38,35 +39,7 @@ const PokeDetailsPage: FC = () => {
               imageUrls={imageUrls}
               setImage={setImage}
             />
-            <div className={s.description}>
-              <h3>Additional Information</h3>
-              <ul className={s.description_body}>
-                {poke.base_experience && (
-                  <li>
-                    <strong>Base Experience</strong>
-                    <span>{poke.base_experience}</span>
-                  </li>
-                )}
-                {poke.height && (
-                  <li>
-                    <strong>Height</strong>
-                    <span>{poke.weight}</span>
-                  </li>
-                )}
-                {poke.weight && (
-                  <li>
-                    <strong>Weight</strong>
-                    <span>{poke.weight}</span>
-                  </li>
-                )}
-                {poke.order && (
-                  <li>
-                    <strong>Order</strong>
-                    <span>{poke.order}</span>
-                  </li>
-                )}
-              </ul>
-            </div>
+            <MoreInfo pokedex={poke} />
           </div>
         </div>
       </section>

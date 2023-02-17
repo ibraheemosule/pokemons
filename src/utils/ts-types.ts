@@ -33,6 +33,7 @@ export interface IPokedex {
   sprites: ISprite;
   species: ISpecies;
   moves: IMove[];
+  order: number;
   game_indices: IGameIndices[];
   base_experience: number;
 }
