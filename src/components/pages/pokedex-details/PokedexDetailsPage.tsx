@@ -1,7 +1,7 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import s from './s_pokedex-details.module.scss';
 import DetailsNav from './details-nav/DetailsNav';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../store/hooks';
 import poke from './testingData';
 import { useGetImages } from './hooks/useGetImages';
@@ -13,22 +13,28 @@ import Heading from './Heading/Heading';
 const PokeDetailsPage: FC = () => {
   const { pokedexDetailsList } = useAppSelector(({ pokedex }) => pokedex);
   const name = useLocation().state as keyof typeof pokedexDetailsList;
-  const [pokedex, setPokedex] = useState<IPokedex>(poke);
+  const [pokedex, setPokedex] = useState<IPokedex>(
+    pokedexDetailsList[name] || poke
+  );
 
-  const { image, setImage, imageUrls } = useGetImages(poke.sprites);
+  const { image, setImage, imageUrls } = useGetImages(pokedex.sprites);
+
+  if (!pokedexDetailsList[name]) {
+    return <Navigate to="/" replace={true} />;
+  }
 
   return (
     <main>
       <section className={s.container}>
         <div className={s.wrapper}>
-          <Heading id={poke.id} image={image} name={poke.name} />
+          <Heading id={pokedex.id} image={image} name={pokedex.name} />
           <div className={s.pokedex_info}>
             <DetailsNav
-              pokedex={poke}
+              pokedex={pokedex}
               imageUrls={imageUrls}
               setImage={setImage}
             />
-            <MoreInfo pokedex={poke} />
+            <MoreInfo pokedex={pokedex} />
           </div>
         </div>
       </section>
