@@ -3,7 +3,9 @@ import { ISprite } from '../../../../utils/ts-types';
 
 export const useGetImages = (sprites: ISprite) => {
   const [image, setImage] = useState(
-    sprites.front_shiny || sprites.front_default
+    sprites?.other?.home?.front_default ||
+      sprites?.other['official-artwork']?.front_default ||
+      sprites.front_default
   );
 
   const imageUrls = useMemo(() => {

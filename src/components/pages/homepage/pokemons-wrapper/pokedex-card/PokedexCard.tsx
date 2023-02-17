@@ -29,7 +29,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
   }, [pokedex]);
 
   const fetchPokeDetails = async () => {
-    let pokedexInfo;
+    let poke;
     const pokedexInStore = pokedexList[name as keyof typeof pokedexList];
 
     setError(false);
@@ -37,19 +37,21 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
 
     if (!pokedexInStore) {
       try {
-        pokedexInfo = await fetchData(controller.signal)(name);
+        poke = await fetchData(controller.signal)(name);
       } catch (e) {
         setError(true);
         setLoading(false);
         return;
       }
-    } else pokedexInfo = pokedexInStore;
+    } else poke = pokedexInStore;
 
     setImgUrl(
-      pokedexInfo.sprites.front_shiny || pokedexInfo.sprites.front_default
+      poke.sprites?.other?.home?.front_default ||
+        poke.sprites?.other['official-artwork']?.front_default ||
+        poke.sprites.front_default
     );
 
-    const pokeTypes = pokedexInfo.types.map(
+    const pokeTypes = poke.types.map(
       (type: { type: { name: string } }) => type.type.name
     );
 
@@ -59,7 +61,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
     const primaryType = pokeTypes[0];
     setColor(pokedexColors[primaryType as keyof typeof pokedexColors]);
 
-    dispatch(addToPokedexDetailsList({ [name]: pokedexInfo }));
+    dispatch(addToPokedexDetailsList({ [name]: poke }));
   };
 
   //get the first two names if the names are more than 2
