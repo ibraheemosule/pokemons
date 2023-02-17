@@ -33,6 +33,7 @@ export interface IPokedex {
   sprites: ISprite;
   species: ISpecies;
   moves: IMove[];
+  game_indices: IGameIndices[];
   base_experience: number;
 }
 
@@ -114,4 +115,9 @@ export interface IHeldItem {
     };
     rarity: number;
   }[];
+}
+
+export interface IGameIndices {
+  game_index: number;
+  version: { name: string; url: string };
 }

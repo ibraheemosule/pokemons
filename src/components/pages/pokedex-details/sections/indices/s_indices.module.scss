@@ -1,0 +1,55 @@
+@import '../../../../../base-styles/globals';
+
+.indices {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  text-transform: capitalize;
+  justify-content: space-around;
+
+  .item {
+    border-radius: rem(5);
+    background: $pry-col-light;
+    color: $pry-col-dark;
+    max-height: 200px;
+    max-width: 400px;
+    width: 100%;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    & > h4 {
+      text-align: center;
+      text-transform: uppercase;
+      padding: 1rem;
+    }
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  thead th {
+    font-weight: bold;
+    padding: rem(10) rem(20);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: rem(10) rem(20);
+    text-align: center;
+    white-space: nowrap;
+    color: $pry-col;
+  }
+
+  td:first-child {
+    width: 30%;
+  }
+}

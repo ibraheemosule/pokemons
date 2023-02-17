@@ -17,8 +17,9 @@ const Stats = lazy(() => import('../stats/Stats'));
 const HeldItems = lazy(() => import('../held-items/HeldItems'));
 const Abilities = lazy(() => import('../abilities/Abilities'));
 const Evolutions = lazy(() => import('../evolutions/Evolutions'));
+const Indices = lazy(() => import('../indices/Indices'));
 
-export const detailsNavList = [
+const detailsNavList = [
   'images',
   'moves',
   'evolutions',
@@ -59,6 +60,7 @@ const DetailsNav: FC<PropType> = ({ pokedex, imageUrls, setImage }) => {
               'held items': <HeldItems items={pokedex.held_items} />,
               stats: <Stats stats={pokedex.stats} />,
               abilities: <Abilities abilities={pokedex.abilities} />,
+              indices: <Indices indices={pokedex.game_indices} />,
             }[content]
           }
         </Suspense>
