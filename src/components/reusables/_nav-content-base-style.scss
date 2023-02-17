@@ -1,0 +1,29 @@
+@import '../../base-styles/globals';
+
+.content_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  text-transform: capitalize;
+  justify-content: space-around;
+
+  .item {
+    border-radius: rem(5);
+    background: $pry-col-light;
+    color: $pry-col-dark;
+    max-height: 200px;
+    width: 100%;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    & > h4 {
+      text-align: center;
+      text-transform: uppercase;
+      padding: 1rem;
+    }
+  }
+}

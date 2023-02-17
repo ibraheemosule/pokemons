@@ -1,0 +1,26 @@
+@import '../../../base-styles/globals';
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+
+  thead th {
+    font-weight: bold;
+    padding: rem(10) rem(20);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: rem(10) rem(20);
+    text-align: center;
+    white-space: nowrap;
+    color: $pry-col;
+  }
+
+  td:first-child {
+    width: 30%;
+  }
+}

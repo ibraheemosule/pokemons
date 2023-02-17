@@ -1,28 +1,20 @@
 import { FC, memo, Children } from 'react';
 import { IHeldItem } from '../../../../../utils/ts-types';
+import CustomTable from '../../../../reusables/custom-table/CustomTable';
 import s from './s_heldItems.module.scss';
+
+const titles = ['item version', 'item rarity'];
 
 const HeldItems: FC<PropType> = ({ items }) => {
   return (
-    <div className={s.held_items_wrapper}>
+    <div className={s.content_wrapper}>
       {items.length ? (
         Children.toArray(
           items.map(({ item, version_details }) => (
             <div className={s.item}>
               <h4>{item.name}</h4>
-
-              <table>
-                <thead>
-                  <tr>
-                    <th>
-                      <h4>Item Version</h4>
-                    </th>
-                    <th>
-                      <h4>Item Rarity</h4>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
+              <CustomTable titles={titles}>
+                <>
                   {Children.toArray(
                     version_details.map(({ rarity, version }) => (
                       <tr>
@@ -31,8 +23,8 @@ const HeldItems: FC<PropType> = ({ items }) => {
                       </tr>
                     ))
                   )}
-                </tbody>
-              </table>
+                </>
+              </CustomTable>
             </div>
           ))
         )

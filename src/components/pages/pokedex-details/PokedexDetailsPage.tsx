@@ -14,7 +14,8 @@ const PokeDetailsPage: FC = () => {
   const { pokedexDetailsList } = useAppSelector(({ pokedex }) => pokedex);
   const name = useLocation().state as keyof typeof pokedexDetailsList;
   const [pokedex, setPokedex] = useState<IPokedex>(
-    pokedexDetailsList[name] || poke
+    // pokedexDetailsList[name] ||
+    poke
   );
 
   const { image, setImage, imageUrls } = useGetImages(pokedex.sprites);

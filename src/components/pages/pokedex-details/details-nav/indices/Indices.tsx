@@ -1,23 +1,16 @@
 import { FC, memo, Children } from 'react';
 import { IGameIndices } from '../../../../../utils/ts-types';
+import CustomTable from '../../../../reusables/custom-table/CustomTable';
 import s from './s_indices.module.scss';
+
+const titles = ['version name', 'index'];
 
 const Indices: FC<PropType> = ({ indices }) => {
   return (
-    <div className={s.indices}>
+    <div className={s.content_wrapper}>
       <div className={s.item}>
-        <table>
-          <thead>
-            <tr>
-              <th>
-                <h4>Version Name</h4>
-              </th>
-              <th>
-                <h4>Index</h4>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+        <CustomTable titles={titles}>
+          <>
             {Children.toArray(
               indices.map((index) => (
                 <tr>
@@ -26,8 +19,8 @@ const Indices: FC<PropType> = ({ indices }) => {
                 </tr>
               ))
             )}
-          </tbody>
-        </table>
+          </>
+        </CustomTable>
       </div>
     </div>
   );
