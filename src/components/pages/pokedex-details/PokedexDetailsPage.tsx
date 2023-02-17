@@ -1,16 +1,17 @@
-import { FC, useState } from 'react';
+import { FC, lazy, useState, Suspense } from 'react';
 import s from './s_pokedex-details.module.scss';
-import DetailsNav from './sections/details-nav/DetailsNav';
-import Forms from './sections/moves/Moves';
-import Images from './sections/images/Images';
-import Stats from './sections/stats/Stats';
-import HeldItems from './sections/held-items/HeldItems';
-import Abilities from './sections/abilities/Abilities';
+import DetailsNav, { detailsNavList } from './sections/details-nav/DetailsNav';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../store/hooks';
 import poke from './testingData';
 import { useGetImages } from './hooks/useGetImages';
-import { getRandomColor } from '../../../utils';
+import spinner from '../../../assets/images/loader.gif';
+
+const Forms = lazy(() => import('./sections/moves/Moves'));
+const Images = lazy(() => import('./sections/images/Images'));
+const Stats = lazy(() => import('./sections/stats/Stats'));
+const HeldItems = lazy(() => import('./sections/held-items/HeldItems'));
+const Abilities = lazy(() => import('./sections/abilities/Abilities'));
 
 const PokeDetailsPage: FC = () => {
   const { pokedexDetailsList } = useAppSelector(({ pokedex }) => pokedex);
@@ -43,7 +44,9 @@ const PokeDetailsPage: FC = () => {
               {/* <Forms moves={poke.moves} /> */}
               {/* <HeldItems items={poke.held_items} /> */}
               {/* <Stats stats={poke.stats} /> */}
-              <Abilities abilities={poke.abilities} />
+              <Suspense fallback={<img src={spinner} alt="loader" />}>
+                <Abilities abilities={poke.abilities} />
+              </Suspense>
             </div>
             <div className={s.description}>
               <h3>Additional Information</h3>
