@@ -2,7 +2,6 @@ import { FC, Children } from 'react';
 import s from './s_pokemonsWrapper.module.scss';
 import PokedexCard from './pokedex-card/PokedexCard';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
-import spinner from '../../../../assets/images/loader.gif';
 import { setSearchError } from '../../../../store/reducers/pokedexReducer';
 import { resetPokemonList } from '../../../../store/reducers/pokemonsReducer';
 import ErrorCard from '../../../reusables/error-card/ErrorCard';
