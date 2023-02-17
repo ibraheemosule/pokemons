@@ -46,14 +46,33 @@ const PokeDetailsPage: FC = () => {
               <Abilities abilities={poke.abilities} />
             </div>
             <div className={s.description}>
-              <h3>More Information</h3>
-              <p>
-                Aijdfkl a jfl dksafjkladkflksafdklklsjdfkl ajsfkljlks
-                akldfkljklsdgjlkajdklfjslkdjf lkajslkdgi asjfa kljalkj fladjld
-                kglsjlkdsajlk cljlkgjladgl flksdj lkgjdlkadklfgjlk bjafdlk
-                lkgjlkdagfkl gljliadfgjlkafdjglj iajdfglkjlgfkadgjc
-                lzjlkcfdglkjlkafj
-              </p>
+              <h3>Additional Information</h3>
+              <ul className={s.description_body}>
+                {poke.base_experience && (
+                  <li>
+                    <strong>Base Experience</strong>
+                    <span>{poke.base_experience}</span>
+                  </li>
+                )}
+                {poke.height && (
+                  <li>
+                    <strong>Height</strong>
+                    <span>{poke.weight}</span>
+                  </li>
+                )}
+                {poke.weight && (
+                  <li>
+                    <strong>Weight</strong>
+                    <span>{poke.weight}</span>
+                  </li>
+                )}
+                {poke.order && (
+                  <li>
+                    <strong>Order</strong>
+                    <span>{poke.order}</span>
+                  </li>
+                )}
+              </ul>
             </div>
           </div>
         </div>
