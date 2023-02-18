@@ -8,7 +8,7 @@ import { fetchPokemonsList } from './store/reducers/pokemonsReducer';
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getPokemons('/?limit=8'));
+    dispatch(getPokemons('pokemon/?limit=8'));
     (async () => {
       const allPokemons = await getAllPokemons();
       dispatch(fetchPokemonsList(allPokemons));

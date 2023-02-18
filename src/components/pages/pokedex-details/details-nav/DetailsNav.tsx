@@ -56,7 +56,7 @@ const DetailsNav: FC<PropType> = ({ pokedex, imageUrls, setImage }) => {
             {
               images: <Images imageUrls={imageUrls} setImage={setImage} />,
               moves: <Moves moves={pokedex.moves} />,
-              evolutions: <Evolutions />,
+              evolutions: <Evolutions name={pokedex.name} />,
               'held items': <HeldItems items={pokedex.held_items} />,
               stats: <Stats stats={pokedex.stats} />,
               abilities: <Abilities abilities={pokedex.abilities} />,

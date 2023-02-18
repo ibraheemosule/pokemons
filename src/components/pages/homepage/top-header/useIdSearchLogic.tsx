@@ -48,7 +48,7 @@ export const useIdSearchLogic = (searchValue: string) => {
     // delay pokemon search by id query by 500ms to
     //enable the users finish typing the id before fetching.
     const delayPokemonIdSearch = setTimeout(async () => {
-      const data = dispatch(getPokedex(`/${searchValue}`));
+      const data = dispatch(getPokedex(`pokemon/${searchValue}`));
       abortFetch.current = data.abort;
     }, 500);
 

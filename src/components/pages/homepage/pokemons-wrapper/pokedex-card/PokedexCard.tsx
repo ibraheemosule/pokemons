@@ -37,7 +37,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
 
     if (!pokedexInStore) {
       try {
-        poke = await fetchData(controller.signal)(name);
+        poke = await fetchData(controller.signal)(`pokemon/${name}`);
       } catch (e) {
         setError(true);
         setLoading(false);

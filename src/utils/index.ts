@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { PokemonListType } from './ts-types';
 
-export const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
+export const BASE_URL = 'https://pokeapi.co/api/v2';
 export const Axios = axios.create({
   baseURL: BASE_URL,
 });
@@ -20,7 +20,7 @@ export const getAllPokemons = async () => {
 
   do {
     try {
-      const res = await fetchData()(`/?limit=500&offset=${offset}`);
+      const res = await fetchData()(`pokemon/?limit=500&offset=${offset}`);
       data = [...data, ...res.results];
       offset += 500;
       next = res.next;
