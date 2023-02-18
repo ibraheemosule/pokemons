@@ -13,3 +13,12 @@
 @mixin transition($value) {
   transition: $value 0.25s ease-out;
 }
+
+@mixin scroll {
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

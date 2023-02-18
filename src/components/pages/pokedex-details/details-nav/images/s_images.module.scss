@@ -3,12 +3,7 @@
 .images_wrapper {
   display: flex;
   column-gap: rem(6);
-  overflow-x: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  @include scroll;
 
   button {
     background-color: $pry-col-light;

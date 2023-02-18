@@ -13,12 +13,7 @@
     color: $pry-col-dark;
     max-height: 200px;
     width: 100%;
-    overflow: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    @include scroll;
 
     & > h4 {
       text-align: center;

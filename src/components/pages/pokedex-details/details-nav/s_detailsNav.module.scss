@@ -7,12 +7,7 @@
     display: flex;
     column-gap: rem(48);
     justify-content: space-between;
-    overflow-x: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    @include scroll;
     border-bottom: 1px solid $pry-col;
 
     li {
