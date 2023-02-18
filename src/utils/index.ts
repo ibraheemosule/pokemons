@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { CancelToken } from 'axios';
 import { PokemonListType } from './ts-types';
 
 export const BASE_URL = 'https://pokeapi.co/api/v2';
@@ -6,9 +6,9 @@ export const Axios = axios.create({
   baseURL: BASE_URL,
 });
 
-export const fetchData = (signal?: AbortSignal) => async (url: string) => {
+export const fetchData = (cancelToken?: CancelToken) => async (url: string) => {
   const { data } = await Axios.get(url, {
-    signal,
+    cancelToken,
   });
   return data;
 };

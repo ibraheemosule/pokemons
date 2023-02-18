@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import Navbar from './navbar/Navbar';
 import HomePage from '../../pages/homepage/Home';
 import PokeDetailsPage from '../../pages/pokedex-details/PokedexDetailsPage';

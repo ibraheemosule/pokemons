@@ -39,7 +39,7 @@ const PokemonsWrapper: FC = () => {
     <section className={s.container}>
       <div className={s.wrapper}>
         {searching ? (
-          <Loader />
+          <Loader width="80px" />
         ) : searchError && !paginatedList.length ? (
           pokedexNotFound
         ) : (

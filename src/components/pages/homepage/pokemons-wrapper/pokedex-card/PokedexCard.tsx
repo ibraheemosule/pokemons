@@ -77,7 +77,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
       <div className={s.card_backdrop} />
       <div className={s.card_view}>
         {loading ? (
-          <Loader width="150px" />
+          <Loader width="50px" />
         ) : error && !imgUrl ? (
           <ErrorCard
             errMessage="Error while fetching details"
