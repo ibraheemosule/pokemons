@@ -30,7 +30,7 @@ const detailsNavList = [
 ];
 
 const DetailsNav: FC<PropType> = ({ pokedex, imageUrls, setImage }) => {
-  const [content, setContent] = useState('images');
+  const [content, setContent] = useState('evolutions');
 
   const active = useCallback(
     (nav: string) => ({

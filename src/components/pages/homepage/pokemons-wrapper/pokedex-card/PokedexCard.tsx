@@ -48,7 +48,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
     setImgUrl(
       poke.sprites?.other?.home?.front_default ||
         poke.sprites?.other['official-artwork']?.front_default ||
-        poke.sprites.front_default
+        poke.sprites?.front_default
     );
 
     const pokeTypes = poke.types.map(

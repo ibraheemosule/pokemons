@@ -36,6 +36,7 @@ export interface IPokedex {
   order: number;
   game_indices: IGameIndices[];
   base_experience: number;
+  evolutions?: string[];
 }
 
 export interface IAbility {
@@ -121,4 +122,22 @@ export interface IHeldItem {
 export interface IGameIndices {
   game_index: number;
   version: { name: string; url: string };
+}
+
+export interface IPokemonEvolution {
+  species: {
+    name: string;
+    url: string;
+  };
+  evolution_details: {
+    item: {
+      name: string;
+      url: string;
+    };
+    trigger: {
+      name: string;
+      url: string;
+    };
+  }[];
+  evolves_to: IPokemonEvolution[];
 }
