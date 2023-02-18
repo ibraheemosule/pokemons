@@ -29,11 +29,13 @@ const Evolutions: FC<PropType> = ({ name }) => {
         };
         setEvolutions(evolutionNames);
 
+        console.log(evolutionNames);
+
         dispatch(addToPokedexDetailsList({ [name]: updateDetails }));
         setLoading(false);
       })();
     } else setEvolutions(pokedexDetailsList[name].evolutions!);
-  });
+  }, []);
 
   function getEvolutionNames(chain: IPokemonEvolution) {
     const evolvesToNames: string[] = [];
@@ -47,9 +49,10 @@ const Evolutions: FC<PropType> = ({ name }) => {
     return evolvesToNames;
   }
   return (
-    <div className={s.wrapper}>
-      <h4>Evolution Progress</h4>
+    <div className={s.content}>
+      <h3 className={s.content_title}>Evolution Progress</h3>
       <div className={s.evolutions}>
+        {!loading && !evolutions.length && <h4>No evolution</h4>}
         {evolutions.length ? (
           evolutions.map((val, index) =>
             Children.toArray(

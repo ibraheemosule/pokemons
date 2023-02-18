@@ -1,13 +1,19 @@
 @import '../../../../../base-styles/globals';
 
+.content_title {
+  margin: 0 auto 1rem 0;
+  width: 100%;
+}
+
 .wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: rem(16);
   list-style-type: none;
-  overflow-y: scroll;
+
   max-height: 200px;
   text-transform: capitalize;
+  @include scroll;
 
   li {
     border-radius: rem(5);

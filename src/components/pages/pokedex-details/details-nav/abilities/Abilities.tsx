@@ -3,13 +3,14 @@ import { IAbility } from '../../../../../utils/ts-types';
 import CustomTable from '../../../../reusables/custom-table/CustomTable';
 import s from './s_abilities.module.scss';
 
-const titles = ['ability name', 'slot', 'hidden'];
+const tableTitles = ['name', 'slot', 'hidden'];
 
 const Abilities: FC<PropType> = ({ abilities }) => {
   return (
-    <div className={s.content_wrapper}>
+    <div className={s.content}>
+      <h3 className={s.content_title}>Abilities</h3>
       <div className={s.item}>
-        <CustomTable titles={titles}>
+        <CustomTable titles={tableTitles}>
           <>
             {Children.toArray(
               abilities.map((ability) => (

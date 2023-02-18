@@ -1,11 +1,16 @@
 @import '../../base-styles/globals';
 
-.content_wrapper {
+.content {
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
   text-transform: capitalize;
   justify-content: space-around;
+
+  &_title {
+    margin: 0 auto 1rem 0;
+    width: 100%;
+  }
 
   .item {
     border-radius: rem(5);
@@ -14,7 +19,6 @@
     max-height: 200px;
     width: 100%;
     @include scroll;
-
     & > h4 {
       text-align: center;
       text-transform: uppercase;

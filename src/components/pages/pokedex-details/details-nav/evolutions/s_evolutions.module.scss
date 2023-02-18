@@ -1,15 +1,19 @@
 @import '../../../../../base-styles/globals';
 
-.wrapper {
+.content {
+  &_title {
+    margin: 0 auto 1rem 0;
+    width: 100%;
+  }
   .evolutions {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
-    overflow: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
+    @include scroll;
+
+    & > h4 {
+      width: 100%;
+      text-align: center;
     }
 
     & > img {

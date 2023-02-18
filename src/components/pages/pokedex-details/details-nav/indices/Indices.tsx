@@ -3,13 +3,14 @@ import { IGameIndices } from '../../../../../utils/ts-types';
 import CustomTable from '../../../../reusables/custom-table/CustomTable';
 import s from './s_indices.module.scss';
 
-const titles = ['version name', 'index'];
+const tableTitles = ['version name', 'index'];
 
 const Indices: FC<PropType> = ({ indices }) => {
   return (
-    <div className={s.content_wrapper}>
+    <div className={s.content}>
+      <h3 className={s.content_title}>Game Indices</h3>
       <div className={s.item}>
-        <CustomTable titles={titles}>
+        <CustomTable titles={tableTitles}>
           <>
             {Children.toArray(
               indices.map((index) => (

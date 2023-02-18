@@ -1,10 +1,15 @@
 @import '../../../../reusables/nav-content-base-style';
 
-.content_wrapper {
+.content {
   gap: rem(24);
 
   .item {
     width: unset;
+
+    & > h4 {
+      color: $pry-col;
+      text-transform: capitalize;
+    }
   }
 
   .no_item {

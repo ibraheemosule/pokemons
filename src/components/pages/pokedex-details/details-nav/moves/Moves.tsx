@@ -4,13 +4,16 @@ import { getRandomColor } from '../../../../../utils';
 
 const Moves: FC<PropType> = ({ moves }) => {
   return (
-    <ul className={s.wrapper}>
-      {Children.toArray(
-        moves.map(({ move: { name } }) => (
-          <li style={{ background: getRandomColor() }}>{name}</li>
-        ))
-      )}
-    </ul>
+    <div className={s.content}>
+      <h3 className={s.content_title}>Moves</h3>
+      <ul className={s.wrapper}>
+        {Children.toArray(
+          moves.map(({ move: { name } }) => (
+            <li style={{ background: getRandomColor() }}>{name}</li>
+          ))
+        )}
+      </ul>
+    </div>
   );
 };
 

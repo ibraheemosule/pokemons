@@ -7,7 +7,8 @@ const titles = ['item version', 'item rarity'];
 
 const HeldItems: FC<PropType> = ({ items }) => {
   return (
-    <div className={s.content_wrapper}>
+    <div className={s.content}>
+      <h3 className={s.content_title}>Held Items</h3>
       {items.length ? (
         Children.toArray(
           items.map(({ item, version_details }) => (
