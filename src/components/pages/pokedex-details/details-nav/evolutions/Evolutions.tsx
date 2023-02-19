@@ -17,6 +17,7 @@ const Evolutions: FC<PropType> = ({ name }) => {
   const [evolutions, setEvolutions] = useState<string[]>([]);
 
   const [url, setUrl] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error, loading, setRetry } = useFetch<any>(url);
 
   useEffect(() => {
