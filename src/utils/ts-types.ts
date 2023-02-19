@@ -3,6 +3,10 @@ export type PokemonListType = {
   url: string;
 };
 
+export interface IDataResponse {
+  results: PokemonListType[];
+  next: string;
+}
 export interface IPokemonsState {
   paginatedList: PokemonListType[];
   pokemonsList: PokemonListType[];
