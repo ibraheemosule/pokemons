@@ -1,5 +1,4 @@
 import { Children, FC, memo, useEffect, useState } from 'react';
-import { fetchData } from '../../../../../utils';
 import { IPokemonEvolution } from '../../../../../utils/ts-types';
 import s from './s_evolutions.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
@@ -7,35 +6,39 @@ import { addToPokedexDetailsList } from '../../../../../store/reducers/pokedexRe
 import { getRandomColor } from '../../../../../utils';
 import arrow from '../../../../../assets/images/arrow-right.png';
 import Loader from '../../../../reusables/loader/Loader';
+import useFetch from '../../../../reusables/hooks/useFetch';
+import ErrorCard from '../../../../reusables/error-card/ErrorCard';
+
+const errMessage = 'Could not fetch evolutions data';
 
 const Evolutions: FC<PropType> = ({ name }) => {
   const dispatch = useAppDispatch();
   const { pokedexDetailsList } = useAppSelector((state) => state.pokedex);
   const [evolutions, setEvolutions] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+
+  const [url, setUrl] = useState('');
+  const { data, error, loading, setRetry } = useFetch<any>(url);
 
   useEffect(() => {
-    if (!pokedexDetailsList[name]?.evolutions) {
-      (async () => {
-        setLoading(true);
-        const data = await fetchData()(`pokemon-species/${name}`);
-        const evolutionUrl = data.evolution_chain.url.split('v2/')[1];
-        const { chain } = await fetchData()(evolutionUrl);
-        const evolutionNames = getEvolutionNames(chain);
-
-        const updateDetails = {
-          evolutions: evolutionNames,
-          ...pokedexDetailsList[name],
-        };
-        setEvolutions(evolutionNames);
-
-        console.log(evolutionNames);
-
-        dispatch(addToPokedexDetailsList({ [name]: updateDetails }));
-        setLoading(false);
-      })();
+    if (!pokedexDetailsList[name]?.evolutions && !data) {
+      setUrl(`pokemon-species/${name}`);
+      return;
+    }
+    if (data?.evolution_chain) {
+      const evolutionUrl = data?.evolution_chain.url.split('v2/')[1];
+      setUrl(evolutionUrl);
+      return;
+    }
+    if (data?.chain) {
+      const evolutionNames = getEvolutionNames(data.chain);
+      const updateDetails = {
+        evolutions: evolutionNames,
+        ...pokedexDetailsList[name],
+      };
+      setEvolutions(evolutionNames);
+      dispatch(addToPokedexDetailsList({ [name]: updateDetails }));
     } else setEvolutions(pokedexDetailsList[name].evolutions!);
-  }, []);
+  }, [data]);
 
   function getEvolutionNames(chain: IPokemonEvolution) {
     const evolvesToNames: string[] = [];
@@ -48,11 +51,16 @@ const Evolutions: FC<PropType> = ({ name }) => {
 
     return evolvesToNames;
   }
+
+  function retryFetch() {
+    setRetry((number) => number + 1);
+  }
+
   return (
     <div className={s.content}>
       <h3 className={s.content_title}>Evolution Progress</h3>
       <div className={s.evolutions}>
-        {!loading && !evolutions.length && <h4>No evolution</h4>}
+        {!loading && !evolutions.length && !error && <h4>No evolution</h4>}
         {evolutions.length ? (
           evolutions.map((val, index) =>
             Children.toArray(
@@ -66,7 +74,17 @@ const Evolutions: FC<PropType> = ({ name }) => {
           )
         ) : loading ? (
           <Loader width="70px" />
-        ) : null}
+        ) : (
+          !!error && (
+            <div className={s.error_wrapper}>
+              <ErrorCard
+                size="sm"
+                errMessage={errMessage}
+                onBtnClick={retryFetch}
+              />
+            </div>
+          )
+        )}
       </div>
     </div>
   );

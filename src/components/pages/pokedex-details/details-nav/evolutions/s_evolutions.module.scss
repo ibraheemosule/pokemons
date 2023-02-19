@@ -29,5 +29,13 @@
       background: $pry-col;
       text-transform: capitalize;
     }
+
+    .error_wrapper {
+      margin: auto;
+
+      h3 {
+        font-size: smaller;
+      }
+    }
   }
 }

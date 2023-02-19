@@ -23,10 +23,11 @@ const useFetch = <T,>(url?: string): FetchData<T> => {
       setLoading(false);
       return;
     }
+
     setRetry((retry) => retry++);
     setLoading(true);
-
     setError(null);
+
     let attempts = 3;
     const apiCall = async () => {
       while (attempts > 0) {
