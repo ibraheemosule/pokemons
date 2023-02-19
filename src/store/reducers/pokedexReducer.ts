@@ -12,6 +12,7 @@ const initialState: IPokedexState = {
   searching: false,
   searchError: '',
   searchByIdResult: [],
+  lastSearchValue: '',
 };
 
 const pokedexSlice = createSlice({
@@ -33,6 +34,9 @@ const pokedexSlice = createSlice({
 
     setSearchError(state: IPokedexState, action: PayloadAction<string>) {
       state.searchError = action.payload;
+    },
+    setLastSearchValue(state: IPokedexState, action: PayloadAction<string>) {
+      state.lastSearchValue = action.payload;
     },
   },
 
@@ -70,6 +74,7 @@ export const {
   addToPokedexDetailsList,
   resetSearchByIdResult,
   setSearchError,
+  setLastSearchValue,
 } = pokedexSlice.actions;
 
 export default pokedexSlice.reducer;

@@ -1,10 +1,11 @@
 import s from './s_topHeader.module.scss';
-import { FC, useState, useCallback } from 'react';
+import { FC, useState, useCallback, useEffect } from 'react';
 import SearchIcon from '../../../../assets/icons/SearchIcon';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setPokemonList } from '../../../../store/reducers/pokemonsReducer';
 import {
   resetSearchByIdResult,
+  setLastSearchValue,
   setSearchError,
 } from '../../../../store/reducers/pokedexReducer';
 import { useIdSearchLogic } from './useIdSearchLogic';
@@ -12,9 +13,18 @@ import { useIdSearchLogic } from './useIdSearchLogic';
 const TopHeader: FC = () => {
   const dispatch = useAppDispatch();
   const { immutablePokemonsList } = useAppSelector(({ pokemons }) => pokemons);
-  const [searchValue, setSearchValue] = useState('');
+  const { lastSearchValue } = useAppSelector(({ pokedex }) => pokedex);
+  const [searchValue, setSearchValue] = useState(lastSearchValue);
 
   useIdSearchLogic(searchValue);
+
+  useEffect(
+    () => () => {
+      dispatch(setLastSearchValue(searchValue));
+      dispatch(setSearchError(''));
+    },
+    [searchValue]
+  );
 
   const updateSearchValue = useCallback(
     (inputText: string) => {
@@ -55,6 +65,7 @@ const TopHeader: FC = () => {
             <input
               type="text"
               maxLength={25}
+              value={searchValue}
               onChange={(e) => updateSearchValue(e.target.value)}
               placeholder="Name or number"
             />

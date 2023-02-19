@@ -37,7 +37,6 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
 
   useLayoutEffect(() => {
     const pokedexInStore = pokedexList[name as keyof typeof pokedexList];
-    console.log(pokedexInStore);
     if (!pokedexInStore) {
       setPath(`pokemon/${name}`);
       return;
@@ -107,7 +106,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
           {cardJSX}
         </Link>
       ) : (
-        <div className={s.card}>{cardJSX}</div>
+        <span className={s.card}>{cardJSX}</span>
       )}
     </>
   );

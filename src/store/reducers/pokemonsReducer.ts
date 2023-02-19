@@ -8,6 +8,7 @@ const initialState: IPokemonsState = {
   paginatedList: [],
   loading: false,
   error: '',
+  lastPaginatedNumber: 1,
 };
 
 const pokemonsSlice = createSlice({
@@ -28,6 +29,9 @@ const pokemonsSlice = createSlice({
 
     setPaginatedList(state, action: PayloadAction<PokemonListType[]>) {
       state.paginatedList = action.payload;
+    },
+    setLastPaginatedNumber(state, action: PayloadAction<number>) {
+      state.lastPaginatedNumber = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -54,6 +58,7 @@ export const {
   setPokemonList,
   resetPokemonList,
   setPaginatedList,
+  setLastPaginatedNumber,
 } = pokemonsSlice.actions;
 
 export default pokemonsSlice.reducer;

@@ -17,12 +17,6 @@ const PokemonsWrapper: FC = () => {
     dispatch(resetPokemonList());
   };
 
-  // const showLoadingSpinner = (
-  //   <div className={s.spinner}>
-  //     <img src={spinner} alt="loading spinner" />
-  //   </div>
-  // );
-
   const renderPokemonList = Children.toArray(
     paginatedList.map((pokedex) => <PokedexCard pokedex={pokedex} />)
   );
@@ -39,7 +33,7 @@ const PokemonsWrapper: FC = () => {
     <section className={s.container}>
       <div className={s.wrapper}>
         {searching ? (
-          <Loader width="80px" />
+          <Loader width="70px" />
         ) : searchError && !paginatedList.length ? (
           pokedexNotFound
         ) : (

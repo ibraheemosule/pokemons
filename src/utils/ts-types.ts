@@ -13,6 +13,7 @@ export interface IPokemonsState {
   immutablePokemonsList: PokemonListType[];
   loading: boolean;
   error: string;
+  lastPaginatedNumber: number;
 }
 
 export interface INamedPokedexDetail {
@@ -22,6 +23,7 @@ export interface IPokedexState {
   pokedexDetailsList: INamedPokedexDetail;
   searchError: string;
   searching: boolean;
+  lastSearchValue: string;
   searchByIdResult: PokemonListType[];
 }
 

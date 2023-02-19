@@ -33,7 +33,7 @@
   .wrapper {
     min-height: 400px;
     & > a,
-    & > div {
+    & > span {
       flex-basis: 45%;
     }
   }
@@ -50,7 +50,7 @@
     gap: rem(40) 2.5%;
 
     & > a,
-    & > div {
+    & > span {
       flex-basis: 30%;
     }
   }
@@ -63,7 +63,7 @@
     min-height: 350px;
 
     & > a,
-    & > div {
+    & > span {
       flex-basis: 20%;
     }
   }
