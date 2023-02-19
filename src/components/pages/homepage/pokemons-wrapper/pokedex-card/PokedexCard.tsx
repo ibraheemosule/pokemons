@@ -1,12 +1,20 @@
-import { FC, memo, useCallback, useEffect, useState } from 'react';
+import {
+  FC,
+  memo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import s from './s_pokedexCard.module.scss';
 import { Link } from 'react-router-dom';
-import { PokemonListType } from '../../../../../utils/ts-types';
-import { fetchData, pokedexColors } from '../../../../../utils/';
+import { IPokedex, PokemonListType } from '../../../../../utils/ts-types';
+import { pokedexColors } from '../../../../../utils/';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { addToPokedexDetailsList } from '../../../../../store/reducers/pokedexReducer';
 import ErrorCard from '../../../../reusables/error-card/ErrorCard';
 import Loader from '../../../../reusables/loader/Loader';
+import useFetch from '../../../../reusables/hooks/useFetch';
 
 const PokedexCard: FC<PropType> = ({ pokedex }) => {
   const pokedexList = useAppSelector(
@@ -14,55 +22,45 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
   );
   const [imgUrl, setImgUrl] = useState('');
   const [color, setColor] = useState('#68A090');
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { name, url } = pokedex;
   const dispatch = useAppDispatch();
   const splitUrl = url.split('/');
   const id = splitUrl[splitUrl.length - 2];
-  const controller = new AbortController();
+  const [path, setPath] = useState('');
+  const {
+    data: poke,
+    error,
+    loading,
+    setData: setPoke,
+    setRetry,
+  } = useFetch<IPokedex>(path);
 
-  useEffect(() => {
-    fetchPokeDetails();
-
-    return () => controller.abort();
+  useLayoutEffect(() => {
+    const pokedexInStore = pokedexList[name as keyof typeof pokedexList];
+    console.log(pokedexInStore);
+    if (!pokedexInStore) {
+      setPath(`pokemon/${name}`);
+      return;
+    }
+    setPoke(pokedexInStore);
   }, [pokedex]);
 
-  const fetchPokeDetails = async () => {
-    let poke;
-    const pokedexInStore = pokedexList[name as keyof typeof pokedexList];
+  useEffect(() => {
+    if (poke) {
+      setImgUrl(
+        poke?.sprites?.other?.home?.front_default ||
+          poke?.sprites?.other['official-artwork']?.front_default ||
+          poke.sprites?.front_default
+      );
+      const pokeTypes = poke?.types.map(
+        (type: { type: { name: string } }) => type.type.name
+      );
 
-    setError(false);
-    setLoading(true);
-
-    if (!pokedexInStore) {
-      try {
-        poke = await fetchData(controller.signal)(`pokemon/${name}`);
-      } catch (e) {
-        setError(true);
-        setLoading(false);
-        return;
-      }
-    } else poke = pokedexInStore;
-
-    setImgUrl(
-      poke.sprites?.other?.home?.front_default ||
-        poke.sprites?.other['official-artwork']?.front_default ||
-        poke.sprites?.front_default
-    );
-
-    const pokeTypes = poke.types.map(
-      (type: { type: { name: string } }) => type.type.name
-    );
-
-    setError(() => false);
-    setLoading(() => false);
-
-    const primaryType = pokeTypes[0];
-    setColor(pokedexColors[primaryType as keyof typeof pokedexColors]);
-
-    dispatch(addToPokedexDetailsList({ [name]: poke }));
-  };
+      const primaryType = pokeTypes[0];
+      setColor(pokedexColors[primaryType as keyof typeof pokedexColors]);
+      dispatch(addToPokedexDetailsList({ [name]: poke }));
+    }
+  }, [JSON.stringify(poke)]);
 
   //get the first two names if the names are more than 2
   const nameSnippet = useCallback(() => {
@@ -82,7 +80,9 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
           <ErrorCard
             errMessage="Error while fetching details"
             size="sm"
-            onBtnClick={() => fetchPokeDetails()}
+            onBtnClick={() => {
+              setRetry((num) => num + 1);
+            }}
           />
         ) : (
           <p>

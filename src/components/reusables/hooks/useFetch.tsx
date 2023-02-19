@@ -7,6 +7,8 @@ interface FetchData<T> {
   error: Error | null;
   data: T | null;
   setData: Dispatch<SetStateAction<T | null>>;
+  setRetry: Dispatch<SetStateAction<number>>;
+  retry: number;
 }
 
 const useFetch = <T,>(url?: string): FetchData<T> => {
@@ -17,8 +19,13 @@ const useFetch = <T,>(url?: string): FetchData<T> => {
   const source = axios.CancelToken.source();
 
   useEffect(() => {
+    if (!url || retry === 5) {
+      setLoading(false);
+      return;
+    }
     setRetry((retry) => retry++);
-    if (!url || retry === 5) return;
+    setLoading(true);
+
     setError(null);
     let attempts = 3;
     const apiCall = async () => {
@@ -34,19 +41,19 @@ const useFetch = <T,>(url?: string): FetchData<T> => {
             return;
           }
           setError(err as Error);
-          setLoading(false);
           attempts--;
           await new Promise((resolve) => setTimeout(resolve, 1000));
         }
       }
+      setLoading(false);
     };
     apiCall();
     return () => {
-      source.cancel('Request canceled by user');
+      source.cancel('Request canceled');
     };
   }, [url, retry]);
 
-  return { loading, error, data, setData };
+  return { loading, error, data, setData, setRetry, retry };
 };
 
 export default useFetch;

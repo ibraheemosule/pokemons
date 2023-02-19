@@ -8,8 +8,8 @@ import {
   useCallback,
 } from 'react';
 import s from './s_detailsNav.module.scss';
-import spinner from '../../../../assets/images/loader.gif';
 import { IPokedex } from '../../../../utils/ts-types';
+import Loader from '../../../reusables/loader/Loader';
 
 const Moves = lazy(() => import('./moves/Moves'));
 const Images = lazy(() => import('./images/Images'));
@@ -51,7 +51,7 @@ const DetailsNav: FC<PropType> = ({ pokedex, imageUrls, setImage }) => {
         </ul>
       </nav>
       <div className={s.nav_content}>
-        <Suspense fallback={<img src={spinner} alt="loader" />}>
+        <Suspense fallback={<Loader width="50px" />}>
           {
             {
               images: <Images imageUrls={imageUrls} setImage={setImage} />,

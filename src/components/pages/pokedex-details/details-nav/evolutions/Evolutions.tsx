@@ -65,7 +65,7 @@ const Evolutions: FC<PropType> = ({ name }) => {
             )
           )
         ) : loading ? (
-          <Loader width="130px" />
+          <Loader width="70px" />
         ) : null}
       </div>
     </div>
