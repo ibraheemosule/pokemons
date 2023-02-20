@@ -6,7 +6,8 @@ import {
   ChangeEvent,
   useState,
   useEffect,
-  useMemo,
+  useRef,
+  useLayoutEffect,
 } from 'react';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import { paginateFunction } from '../../../../utils';
@@ -26,17 +27,25 @@ const Pagination: FC = () => {
   const { pokemonsList, lastPaginatedNumber } = useAppSelector(
     ({ pokemons }) => pokemons
   );
-  const [number, setNumber] = useState(lastPaginatedNumber);
+  const [number, setNumber] = useState(1);
   const [pageNumberInput, setPageNumberInput] = useState<number>(number);
   const numOfPages = Math.ceil(pokemonsList.length / 8);
+  const latestNumber = useRef<number>(number);
 
-  useMemo(() => setNumber(lastPaginatedNumber), [JSON.stringify(pokemonsList)]);
+  useLayoutEffect(() => {
+    if (lastPaginatedNumber > 1) {
+      setNumber(lastPaginatedNumber);
+      latestNumber.current = lastPaginatedNumber;
+      dispatch(setLastPaginatedNumber(1));
+      return;
+    }
+    setNumber(1);
+    latestNumber.current = 1;
+  }, [JSON.stringify(pokemonsList)]);
 
   useEffect(() => {
     setPageNumberInput(number);
-    return () => {
-      dispatch(setLastPaginatedNumber(number));
-    };
+    latestNumber.current = number;
   }, [number]);
 
   useEffect(() => {
@@ -48,6 +57,13 @@ const Pagination: FC = () => {
 
     dispatch(setPaginatedList([...paginatedArray]));
   }, [JSON.stringify(pokemonsList), number]);
+
+  useEffect(
+    () => () => {
+      dispatch(setLastPaginatedNumber(latestNumber.current));
+    },
+    []
+  );
 
   const increment = () => {
     if (number < numOfPages) setNumber((number) => number + 1);
