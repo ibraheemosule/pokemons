@@ -12,7 +12,9 @@ import { useIdSearchLogic } from './useIdSearchLogic';
 
 const TopHeader: FC = () => {
   const dispatch = useAppDispatch();
-  const { immutablePokemonsList } = useAppSelector(({ pokemons }) => pokemons);
+  const { immutablePokemonsList, pokemonsList } = useAppSelector(
+    ({ pokemons }) => pokemons
+  );
   const { lastSearchValue } = useAppSelector(({ pokedex }) => pokedex);
   const [searchValue, setSearchValue] = useState(lastSearchValue);
 
@@ -25,6 +27,10 @@ const TopHeader: FC = () => {
     },
     [searchValue]
   );
+
+  useEffect(() => {
+    immutablePokemonsList.length === pokemonsList.length && setSearchValue('');
+  }, [pokemonsList]);
 
   const updateSearchValue = useCallback(
     (inputText: string) => {
