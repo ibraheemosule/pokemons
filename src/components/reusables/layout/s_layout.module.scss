@@ -29,7 +29,7 @@
     border-radius: 0 0 rem(5) rem(5);
     white-space: pre;
     font-weight: 600;
-    @include transition(top);
+    transition: top 2s ease-out;
 
     > div {
       display: flex;
@@ -50,13 +50,5 @@
         flex-shrink: 0;
       }
     }
-  }
-
-  .show {
-    top: 0%;
-  }
-
-  .hide {
-    top: -100%;
   }
 }

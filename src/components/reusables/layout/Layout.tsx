@@ -19,12 +19,7 @@ const Layout: FC<ILayout> = ({ children }) => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.pokemons);
   const [url, setUrl] = useState<string>();
-  const {
-    data,
-    error: fetchError,
-    error: fetching,
-    setData,
-  } = useFetch<IDataResponse>(url);
+  const { data, error: fetchError, setData } = useFetch<IDataResponse>(url);
   const allPokemon = useRef<PokemonListType[]>([]);
   const offset = useRef(0);
 
@@ -51,6 +46,10 @@ const Layout: FC<ILayout> = ({ children }) => {
 
   const retryFetch = () => setData(null);
 
+  const showTooltip = {
+    top: data !== null && !data?.results.length ? '-100%' : '0%',
+  };
+
   return (
     <main className={s.layout}>
       {loading ? (
@@ -61,11 +60,7 @@ const Layout: FC<ILayout> = ({ children }) => {
         <h4 className={s.error}>An Error Ocurred, Refresh Page</h4>
       ) : (
         <>
-          <div
-            className={`${s.all_pokemon_fetch} ${fetching && s.show} ${
-              data !== null && data?.results.length && s.show
-            } ${data !== null && !data?.results.length && s.hide}`}
-          >
+          <div style={showTooltip} className={s.all_pokemon_fetch}>
             {fetchError ? (
               <div>
                 <span>list incomplete!</span>{' '}

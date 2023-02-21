@@ -16,9 +16,9 @@ const useFetch = <T,>(url?: string): FetchData<T> => {
   const [error, setError] = useState<Error | null>(null);
   const [data, setData] = useState<T | null>(null);
   const [retry, setRetry] = useState(0);
-  const source = axios.CancelToken.source();
 
   useEffect(() => {
+    const source = axios.CancelToken.source();
     if (!url || retry === 5) {
       setLoading(false);
       return;
@@ -38,7 +38,6 @@ const useFetch = <T,>(url?: string): FetchData<T> => {
           break;
         } catch (err) {
           if (axios.isCancel(err)) {
-            console.log('Request canceled by user');
             return;
           }
           setError(err as Error);

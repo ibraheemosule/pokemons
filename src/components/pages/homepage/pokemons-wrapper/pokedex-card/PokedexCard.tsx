@@ -75,7 +75,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
       <div className={s.card_view}>
         {loading ? (
           <Loader width="50px" />
-        ) : error && !imgUrl ? (
+        ) : error && !poke ? (
           <ErrorCard
             errMessage="Error while fetching details"
             size="sm"
@@ -101,7 +101,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
 
   return (
     <>
-      {imgUrl && !loading ? (
+      {poke && !loading ? (
         <Link to="pokedex" state={name} className={s.card}>
           {cardJSX}
         </Link>
