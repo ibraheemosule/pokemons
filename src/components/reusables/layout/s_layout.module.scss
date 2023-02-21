@@ -23,7 +23,8 @@
     left: 50%;
     transform: translate(-50%);
     display: inline-block;
-    padding: 1rem 2rem;
+    padding: 0.25rem 1rem;
+
     background: $pry-col-light;
     text-transform: capitalize;
     border-radius: 0 0 rem(5) rem(5);
@@ -63,7 +64,7 @@
 @include min(900) {
   .layout {
     .all_pokemon_fetch {
-      padding: 0.25rem 1rem;
+      padding: 1rem 2rem;
     }
   }
 }

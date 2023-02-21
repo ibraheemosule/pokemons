@@ -30,7 +30,6 @@
 
     img {
       width: 100%;
-      height: 100%;
       object-fit: contain;
     }
   }
@@ -50,10 +49,6 @@
     .img_wrapper {
       aspect-ratio: 1/1;
       min-height: 500px;
-
-      img {
-        height: auto;
-      }
     }
   }
 }
