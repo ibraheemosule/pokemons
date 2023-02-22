@@ -102,11 +102,18 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
   return (
     <>
       {poke && !loading ? (
-        <Link to="pokedex" state={name} className={s.card}>
+        <Link
+          to="pokedex"
+          data-test="pokedex-card"
+          state={name}
+          className={s.card}
+        >
           {cardJSX}
         </Link>
       ) : (
-        <span className={s.card}>{cardJSX}</span>
+        <span data-test="pokedex-card" className={s.card}>
+          {cardJSX}
+        </span>
       )}
     </>
   );

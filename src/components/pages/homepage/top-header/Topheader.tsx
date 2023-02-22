@@ -57,7 +57,7 @@ const TopHeader: FC = () => {
   );
 
   return (
-    <section className={s.container}>
+    <section className={s.container} data-test="top-header">
       <div className={s.top_header}>
         <h1>Pokédex</h1>
         <h4>
