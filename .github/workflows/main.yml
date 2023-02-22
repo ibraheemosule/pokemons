@@ -7,6 +7,9 @@ jobs:
       - name: Checkout GitCode
         uses: actions/checkout@v2
 
+      - name: Update PATH
+        run: export PATH=$PATH:./node_modules/.bin
+
       - name: Start server
         run: npm run dev
 
