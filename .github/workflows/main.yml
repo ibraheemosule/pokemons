@@ -1,11 +1,15 @@
-name: Cypress tests
+name: Cypress Tests
+
 on: [push]
+
 jobs:
   cypress-run:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Cypress run with env
-        uses: cypress-io/github-action@v5
+      - name: Cypress run
+        uses: cypress-io/github-action@v5.x.x # use the explicit version number
+        with:
+          build: npm run build
+          start: npm start
