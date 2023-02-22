@@ -9,7 +9,7 @@ import Loader from '../../../../reusables/loader/Loader';
 import useFetch from '../../../../reusables/hooks/useFetch';
 import ErrorCard from '../../../../reusables/error-card/ErrorCard';
 
-const errMessage = 'Could not fetch evolutions data';
+const errMessage = 'could not fetch evolutions data';
 
 const Evolutions: FC<PropType> = ({ name }) => {
   const dispatch = useAppDispatch();
