@@ -7,7 +7,7 @@
 
 .images_wrapper {
   display: flex;
-  column-gap: rem(6);
+  column-gap: rem(16);
   @include scroll;
 
   button {
@@ -47,20 +47,12 @@
 
 @include min(900) {
   .images_wrapper {
-    gap: rem(6);
-
-    button {
-      height: 50px;
-    }
+    gap: rem(16);
   }
 }
 
 @include min(1024) {
   .images_wrapper {
     column-gap: rem(24);
-
-    button {
-      height: 80px;
-    }
   }
 }

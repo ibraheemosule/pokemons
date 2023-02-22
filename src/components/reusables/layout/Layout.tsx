@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import useFetch from '../hooks/useFetch';
 import Navbar from './navbar/Navbar';
 import Loader from '../loader/Loader';
-import s from './Layout.module.scss';
+import s from './s_layout.module.scss';
 
 const Layout: FC<ILayout> = ({ children }) => {
   const dispatch = useAppDispatch();
