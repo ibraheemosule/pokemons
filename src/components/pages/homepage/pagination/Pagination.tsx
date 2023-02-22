@@ -89,11 +89,11 @@ const Pagination: FC = () => {
   };
 
   return (
-    <section className={s.pagination} data-test="pagination">
+    <section className={s.pagination} data-cy="pagination">
       {numOfPages > 0 && (
         <>
           <button
-            data-test="previous"
+            data-cy="previous"
             disabled={number > 1 ? false : true}
             onClick={decrement}
           >
@@ -112,7 +112,7 @@ const Pagination: FC = () => {
           <button
             disabled={number < numOfPages ? false : true}
             onClick={increment}
-            data-test="next"
+            data-cy="next"
           >
             Next
           </button>

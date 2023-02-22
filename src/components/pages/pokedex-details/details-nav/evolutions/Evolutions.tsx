@@ -58,7 +58,7 @@ const Evolutions: FC<PropType> = ({ name }) => {
   }
 
   return (
-    <div className={s.content}>
+    <div data-cy="evolutions" className={s.content}>
       <h3 className={s.content_title}>Evolution Progress</h3>
       <div className={s.evolutions}>
         {!loading && !evolutions.length && !error && <h4>No evolution</h4>}

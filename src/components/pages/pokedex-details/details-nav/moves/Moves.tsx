@@ -4,7 +4,7 @@ import { getRandomColor } from '../../../../../utils';
 
 const Moves: FC<PropType> = ({ moves }) => {
   return (
-    <div className={s.content}>
+    <div data-cy="moves" className={s.content}>
       <h3 className={s.content_title}>Moves</h3>
       <ul className={s.wrapper}>
         {Children.toArray(

@@ -7,7 +7,7 @@ const tableTitles = ['name', 'slot', 'hidden'];
 
 const Abilities: FC<PropType> = ({ abilities }) => {
   return (
-    <div className={s.content}>
+    <div data-cy="abilities" className={s.content}>
       <h3 className={s.content_title}>Abilities</h3>
       <div className={s.item}>
         <CustomTable titles={tableTitles}>

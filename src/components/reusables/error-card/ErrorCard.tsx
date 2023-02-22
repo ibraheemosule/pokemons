@@ -5,7 +5,7 @@ const ErrorCard: FC<PropType> = (props) => {
   const { errMessage, onBtnClick, size = 'lg', btnText } = props;
 
   return (
-    <div className={s.error}>
+    <div data-cy="error-card" className={s.error}>
       <h3>{errMessage}</h3>
       <button className={`${s.error_btn} ${s[size]}`} onClick={onBtnClick}>
         {btnText ?? 'retry'}
