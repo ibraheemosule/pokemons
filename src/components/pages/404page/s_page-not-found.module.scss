@@ -1,0 +1,25 @@
+@import '../../../base-styles/globals';
+
+.notFound {
+  position: absolute;
+  inset: 40px 0 0 0;
+  display: grid;
+  place-items: center;
+
+  &__link {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: $pry-col;
+    border-radius: rem(5);
+    color: $pry-col-light;
+    cursor: pointer;
+    text-transform: inherit;
+    font-weight: bold;
+    @include transition(background);
+
+    &:hover {
+      background: $pry-col-dark;
+    }
+  }
+}

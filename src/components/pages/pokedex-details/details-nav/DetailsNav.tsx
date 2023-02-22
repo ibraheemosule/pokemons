@@ -41,7 +41,7 @@ const DetailsNav: FC<PropType> = ({ pokedex, imageUrls, setImage }) => {
 
   return (
     <>
-      <nav className={s.nav}>
+      <nav data-cy="nav" className={s.nav}>
         <ul>
           {detailsNavList.map((option) => (
             <li style={active(option)} key={option}>

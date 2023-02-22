@@ -13,7 +13,7 @@ const Heading: FC<PropType> = ({ name, image, id }) => {
         </div>
       </div>
       <div className={s.img_wrapper}>
-        <img src={image} alt="pokemon" />
+        <img data-cy="pokedex-image" src={image} alt="pokemon" />
       </div>
     </div>
   );

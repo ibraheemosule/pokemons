@@ -1,22 +1,25 @@
 import { Children, FC, memo, useEffect, useState } from 'react';
-import { IPokemonEvolution } from '../../../../../utils/ts-types';
 import s from './s_evolutions.module.scss';
+import arrow from '../../../../../assets/images/arrow-right.png';
+
+import Loader from '../../../../reusables/loader/Loader';
+import ErrorCard from '../../../../reusables/error-card/ErrorCard';
+import useFetch from '../../../../reusables/hooks/useFetch';
+
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { addToPokedexDetailsList } from '../../../../../store/reducers/pokedexReducer';
+import { IPokemonEvolution } from '../../../../../utils/ts-types';
 import { getRandomColor } from '../../../../../utils';
-import arrow from '../../../../../assets/images/arrow-right.png';
-import Loader from '../../../../reusables/loader/Loader';
-import useFetch from '../../../../reusables/hooks/useFetch';
-import ErrorCard from '../../../../reusables/error-card/ErrorCard';
 
-const errMessage = 'Could not fetch evolutions data';
+const errMessage = 'could not fetch evolutions data';
 
 const Evolutions: FC<PropType> = ({ name }) => {
   const dispatch = useAppDispatch();
   const { pokedexDetailsList } = useAppSelector((state) => state.pokedex);
-  const [evolutions, setEvolutions] = useState<string[]>([]);
 
   const [url, setUrl] = useState('');
+  const [evolutions, setEvolutions] = useState<string[]>([]);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error, loading, setRetry } = useFetch<any>(url);
 
@@ -58,7 +61,7 @@ const Evolutions: FC<PropType> = ({ name }) => {
   }
 
   return (
-    <div className={s.content}>
+    <div data-cy="evolutions" className={s.content}>
       <h3 className={s.content_title}>Evolution Progress</h3>
       <div className={s.evolutions}>
         {!loading && !evolutions.length && !error && <h4>No evolution</h4>}
