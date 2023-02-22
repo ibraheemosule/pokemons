@@ -10,16 +10,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Docker
+      - name: Install and run Cypress tests
+        uses: cypress/included@3.8.0
+
+      - name: Check if tests passed
         run: |
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sudo sh get-docker.sh
-
-      - name: Build Docker image
-        run: docker build -t my-cypress-tests .
-
-      - name: Run Cypress tests
-        run: docker run -it --rm -v $PWD:/e2e -w /e2e my-cypress-tests
+          if [ "$?" -ne 0 ]; then
+            echo "Tests failed on macOS" >&2
+            exit 1
+          else
+            echo "Tests passed on macOS"
+          fi
 
   windows:
     runs-on: windows-latest
@@ -49,8 +50,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build Docker image
-        run: docker build -t my-cypress-tests .
+      - name: Install and run Cypress tests
+        uses: cypress/included@3.8.0
 
-      - name: Run Cypress tests
-        run: docker run -it --rm -v $PWD:/e2e -w /e2e my-cypress-tests
+      - name: Check if tests passed
+        run: |
+          if [ "$?" -ne 0 ]; then
+            echo "Tests failed on Ubuntu" >&2
+            exit 1
+          else
+            echo "Tests passed on Ubuntu"
