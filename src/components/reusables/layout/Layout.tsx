@@ -6,14 +6,14 @@ import {
   useEffect,
   useLayoutEffect,
 } from 'react';
-import Navbar from './navbar/Navbar';
-import s from './s_layout.module.scss';
 import { IDataResponse, PokemonListType } from '../../../utils/ts-types';
-import useFetch from '../hooks/useFetch';
 import { getPokemons } from '../../../store/reducers/apiCalls';
 import { fetchPokemonsList } from '../../../store/reducers/pokemonsReducer';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import useFetch from '../hooks/useFetch';
+import Navbar from './navbar/Navbar';
 import Loader from '../loader/Loader';
+import s from './Layout.module.scss';
 
 const Layout: FC<ILayout> = ({ children }) => {
   const dispatch = useAppDispatch();

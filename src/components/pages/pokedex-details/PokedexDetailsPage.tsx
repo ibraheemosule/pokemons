@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import s from './s_pokedex-details.module.scss';
-import DetailsNav from './details-nav/DetailsNav';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../store/hooks';
 import { useGetImages } from './hooks/useGetImages';
-import MoreInfo from './more-info/MoreInfo';
+import s from './s_pokedex-details.module.scss';
+import DetailsNav from './details-nav/DetailsNav';
 import Heading from './Heading/Heading';
+import MoreInfo from './more-info/MoreInfo';
 
 const PokeDetailsPage: FC = () => {
   const { pokedexDetailsList } = useAppSelector(({ pokedex }) => pokedex);
