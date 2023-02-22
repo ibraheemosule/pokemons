@@ -11,7 +11,7 @@ jobs:
         run: npm install --no-save
 
       - name: Start server
-        run: vite
+        run: ./node_modules/.bin/vite
 
       - name: Run Cypress Test
         uses: cypress-io/github-action@v4
