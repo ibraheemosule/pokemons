@@ -1,62 +1,14 @@
-name: Cypress Test
-
+name: Cypress Tests
 on: [push]
-
 jobs:
-  mac:
-    runs-on: macos-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install and run Cypress tests
-        uses: cypress/included@3.8.0
-
-      - name: Check if tests passed
-        run: |
-          if [ "$?" -ne 0 ]; then
-            echo "Tests failed on macOS" >&2
-            exit 1
-          else
-            echo "Tests passed on macOS"
-          fi
-
-  windows:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install and run Cypress tests
-        run: |
-          choco install nodejs-lts -y
-          npm install
-          npm run cy:run
-
-      - name: Check if tests passed
-        run: |
-          if [ "$?" -ne 0 ]; then
-            echo "Tests failed on Windows" >&2
-            exit 1
-          else
-            echo "Tests passed on Windows"
-
-  ubuntu:
+  Cypress-Test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout GitCode
         uses: actions/checkout@v2
 
-      - name: Install and run Cypress tests
-        uses: cypress/included@3.8.0
-
-      - name: Check if tests passed
-        run: |
-          if [ "$?" -ne 0 ]; then
-            echo "Tests failed on Ubuntu" >&2
-            exit 1
-          else
-            echo "Tests passed on Ubuntu"
+      - name: Run Cypress Test
+        uses: cypress-io/github-action@v4
+        with:
+          command: npx cypress run
+          browser: chrome
