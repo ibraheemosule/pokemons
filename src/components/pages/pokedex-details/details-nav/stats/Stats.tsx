@@ -6,7 +6,7 @@ import s from './s_stats.module.scss';
 const titles = ['name', 'base', 'effort'];
 const Stats: FC<PropType> = ({ stats }) => {
   return (
-    <div className={s.content}>
+    <div data-cy="stats" className={s.content}>
       <h3 className={s.content_title}>Stats</h3>
       <div className={s.item}>
         <CustomTable titles={titles}>

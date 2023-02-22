@@ -7,7 +7,7 @@ const titles = ['item version', 'item rarity'];
 
 const HeldItems: FC<PropType> = ({ items }) => {
   return (
-    <div className={s.content}>
+    <div data-cy="held-items" className={s.content}>
       <h3 className={s.content_title}>Held Items</h3>
       {items.length ? (
         Children.toArray(

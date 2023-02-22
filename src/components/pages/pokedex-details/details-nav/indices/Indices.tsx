@@ -7,7 +7,7 @@ const tableTitles = ['version name', 'index'];
 
 const Indices: FC<PropType> = ({ indices }) => {
   return (
-    <div className={s.content}>
+    <div data-cy="indices" className={s.content}>
       <h3 className={s.content_title}>Game Indices</h3>
       <div className={s.item}>
         <CustomTable titles={tableTitles}>

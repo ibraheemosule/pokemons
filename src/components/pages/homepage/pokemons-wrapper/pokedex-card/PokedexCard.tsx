@@ -90,7 +90,7 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
         )}
       </div>
       <div className={s.card_content__wrapper}>
-        <h3>{nameSnippet()}</h3>
+        <h3 data-cy="pokedex-name">{nameSnippet()}</h3>
         <span style={{ background: color }}>
           <strong>id </strong>
           {id}
@@ -102,11 +102,18 @@ const PokedexCard: FC<PropType> = ({ pokedex }) => {
   return (
     <>
       {poke && !loading ? (
-        <Link to="pokedex" state={name} className={s.card}>
+        <Link
+          to="pokedex"
+          data-cy="pokedex-card"
+          state={name}
+          className={s.card}
+        >
           {cardJSX}
         </Link>
       ) : (
-        <span className={s.card}>{cardJSX}</span>
+        <span data-cy="pokedex-card" className={s.card}>
+          {cardJSX}
+        </span>
       )}
     </>
   );

@@ -30,7 +30,7 @@ const PokemonsWrapper: FC = () => {
   );
 
   return (
-    <section className={s.container}>
+    <section className={s.container} data-cy="cards-wrapper">
       <div className={s.wrapper}>
         {searching ? (
           <Loader width="70px" />

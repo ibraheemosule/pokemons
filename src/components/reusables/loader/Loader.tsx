@@ -3,7 +3,7 @@ import s from './s_loader.module.scss';
 import loader from '../../../assets/images/loader.gif';
 
 const Loader: FC<PropType> = ({ width }) => (
-  <div style={{ width }} className={s.loader}>
+  <div style={{ width }} className={s.loader} data-cy="loader">
     <img src={loader} alt="loading spinner" />
   </div>
 );
