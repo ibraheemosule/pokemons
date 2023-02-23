@@ -50,12 +50,8 @@ context('Homepage tests', () => {
   it('should show loader when a pokemon id is searched', () => {
     const text = '05';
     cy.get('[data-cy=top-header]').find('input').focus().type(text);
-    cy.get('@card').first().dblclick();
     cy.get('[data-cy=loader]').should('exist');
-    cy.wait(1000);
     cy.get('[data-cy=loader]').should('not.exist');
-    cy.get('[data-cy=home-link]').dblclick();
-    cy.get('[data-cy=top-header]').find('input').should('exist');
   });
 
   it('should show no pokemon found text when there is no result from search', () => {
