@@ -17,14 +17,17 @@ import s from './s_layout.module.scss';
 
 const Layout: FC<ILayout> = ({ children }) => {
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.pokemons);
+  const { loading, error, immutablePokemonsList } = useAppSelector(
+    (state) => state.pokemons
+  );
   const [url, setUrl] = useState<string>();
   const { data, error: fetchError, setData } = useFetch<IDataResponse>(url);
   const allPokemon = useRef<PokemonListType[]>([]);
   const offset = useRef(0);
 
   useLayoutEffect(() => {
-    dispatch(getPokemons('pokemon/?limit=8'));
+    if (!immutablePokemonsList.length)
+      dispatch(getPokemons('pokemon/?limit=8'));
   }, []);
 
   useEffect(() => {

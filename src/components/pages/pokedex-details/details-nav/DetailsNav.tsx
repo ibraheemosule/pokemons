@@ -29,7 +29,7 @@ const detailsNavList = [
   'indices',
 ];
 
-const DetailsNav: FC<PropType> = ({ pokedex, imageUrls, setImage }) => {
+const DetailsNav: FC<PropType> = ({ pokedex, imageUrls, setImage, image }) => {
   const [content, setContent] = useState('images');
 
   const active = useCallback(
@@ -54,7 +54,13 @@ const DetailsNav: FC<PropType> = ({ pokedex, imageUrls, setImage }) => {
         <Suspense fallback={<Loader width="50px" />}>
           {
             {
-              images: <Images imageUrls={imageUrls} setImage={setImage} />,
+              images: (
+                <Images
+                  imageUrls={imageUrls}
+                  setImage={setImage}
+                  image={image}
+                />
+              ),
               moves: <Moves moves={pokedex.moves} />,
               evolutions: <Evolutions name={pokedex.name} />,
               'held items': <HeldItems items={pokedex.held_items} />,
@@ -73,6 +79,7 @@ interface PropType {
   pokedex: IPokedex;
   imageUrls: string[];
   setImage: Dispatch<SetStateAction<string>>;
+  image: string;
 }
 
 export default DetailsNav;
