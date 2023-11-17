@@ -9,10 +9,11 @@ import {
   setSearchError,
 } from '../../../../store/reducers/pokedexReducer';
 import { useIdSearchLogic } from './useIdSearchLogic';
+import Loader from '../../../reusables/loader/Loader';
 
 const TopHeader: FC = () => {
   const dispatch = useAppDispatch();
-  const { immutablePokemonsList, pokemonsList } = useAppSelector(
+  const { immutablePokemonsList, pokemonsList, loading } = useAppSelector(
     ({ pokemons }) => pokemons
   );
   const { lastSearchValue } = useAppSelector(({ pokedex }) => pokedex);
@@ -60,23 +61,32 @@ const TopHeader: FC = () => {
     <section className={s.container} data-cy="top-header">
       <div className={s.top_header}>
         <h1>Pokédex</h1>
-        <h4>
-          Search for a Pokemon by name or using its National Pokedex number.
-        </h4>
-        <div className={s.top_header__search}>
-          <div className={s.input_wrapper}>
-            <span className={s.search_icon}>
-              <SearchIcon />
-            </span>
-            <input
-              type="text"
-              maxLength={25}
-              value={searchValue}
-              onChange={(e) => updateSearchValue(e.target.value)}
-              placeholder="Name or number"
-            />
-          </div>
-        </div>
+        <>
+          {loading ? (
+            <Loader width="100px" />
+          ) : (
+            <>
+              <h4>
+                Search for a Pokemon by name or using its National Pokedex
+                number.
+              </h4>
+              <div className={s.top_header__search}>
+                <div className={s.input_wrapper}>
+                  <span className={s.search_icon}>
+                    <SearchIcon />
+                  </span>
+                  <input
+                    type="text"
+                    maxLength={25}
+                    value={searchValue}
+                    onChange={(e) => updateSearchValue(e.target.value)}
+                    placeholder="Name or number"
+                  />
+                </div>
+              </div>
+            </>
+          )}
+        </>
       </div>
     </section>
   );
