@@ -34,7 +34,7 @@ const TopHeader: FC = () => {
 
   const updateSearchValue = useCallback(
     (inputText: string) => {
-      const value = inputText.trim();
+      const value = inputText?.trim()?.toLowerCase();
       setSearchValue(value);
 
       if (Number(value)) {
@@ -44,7 +44,7 @@ const TopHeader: FC = () => {
       dispatch(resetSearchByIdResult());
 
       const filteredList = immutablePokemonsList.filter((poke) =>
-        poke.name.startsWith(value)
+        poke.name.toLowerCase().startsWith(value)
       );
 
       if (!filteredList.length) {
